@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Requests - ETS Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .table {
+            background: white;
+        }
+
+        .badge {
+            padding: 0.5rem 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><i class="fas fa-users"></i> ETS Admin</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 sidebar">
+                <ul class="nav flex-column">
+                    <li><a href="/admin/dashboard"><i class="fas fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="/admin/leaves"><i class="fas fa-calendar-alt"></i> Leave Requests</a></li>
+                    <li><a href="/admin/leaves/pending"><i class="fas fa-clock"></i> Pending Approvals</a></li>
+                </ul>
+            </nav>
+
+            <main class="col-md-10 main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-calendar-alt"></i> Leave Requests</h5>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${leaves.isEmpty()}" class="alert alert-info">
+                            No leave requests found
+                        </div>
+                        <div th:if="${not leaves.isEmpty()}" class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Employee</th>
+                                        <th>Type</th>
+                                        <th>From Date</th>
+                                        <th>To Date</th>
+                                        <th>Reason</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="leave : ${leaves}">
+                                        <td th:text="${leave.employeeName}"></td>
+                                        <td th:text="${leave.leaveType}"></td>
+                                        <td th:text="${leave.startDate}"></td>
+                                        <td th:text="${leave.endDate}"></td>
+                                        <td th:text="${leave.reason}"></td>
+                                        <td>
+                                            <span th:if="${leave.status == 'APPROVED'}" class="badge bg-success">Approved</span>
+                                            <span th:if="${leave.status == 'PENDING'}" class="badge bg-warning">Pending</span>
+                                            <span th:if="${leave.status == 'REJECTED'}" class="badge bg-danger">Rejected</span>
+                                        </td>
+                                        <td>
+                                            <a th:href="@{/admin/leaves/delete/{id}(id=${leave.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

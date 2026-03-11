@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ETS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            display: block;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+            border-left-color: #fff;
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .stat-card p {
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><i class="fas fa-users"></i> ETS Admin</a>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle"></i> Admin
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 sidebar">
+                <ul class="nav flex-column">
+                    <li><a href="/admin/dashboard"><i class="fas fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="/admin/employees"><i class="fas fa-users"></i> Employees</a></li>
+                    <li><a href="/admin/departments"><i class="fas fa-sitemap"></i> Departments</a></li>
+                    <li><a href="/admin/attendance"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+                    <li><a href="/admin/leaves"><i class="fas fa-calendar-alt"></i> Leave Requests</a></li>
+                    <li><a href="/admin/users"><i class="fas fa-user-tie"></i> Users</a></li>
+                </ul>
+            </nav>
+
+            <main class="col-md-10 main-content">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="number" th:text="${totalEmployees}">0</div>
+                            <p><i class="fas fa-users"></i> Total Employees</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="number" th:text="${totalDepartments}">0</div>
+                            <p><i class="fas fa-sitemap"></i> Departments</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="number" th:text="${totalUsers}">0</div>
+                            <p><i class="fas fa-user-tie"></i> Total Users</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="fas fa-tachometer-alt"></i> Dashboard Overview</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i> Welcome to Employee Tracking System Admin Dashboard
+                                </div>
+                                <p>Use the sidebar menu to navigate through different sections:</p>
+                                <ul>
+                                    <li><strong>Employees:</strong> Manage employee information</li>
+                                    <li><strong>Departments:</strong> Manage company departments</li>
+                                    <li><strong>Attendance:</strong> Track employee attendance</li>
+                                    <li><strong>Leave Requests:</strong> Approve or reject leave requests</li>
+                                    <li><strong>Users:</strong> Manage user accounts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
