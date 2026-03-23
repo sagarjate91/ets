@@ -2,16 +2,15 @@ spring:
   application:
     name: ets
   datasource:
-    url: jdbc:mysql://localhost:3306/employee_tracking_system?createDatabaseIfNotExist=true
-    username: root
-    password: admin
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:file:./data/employee_tracking_system
+    username: sa
+    password:
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.H2Dialect
         format_sql: true
     show-sql: false
   thymeleaf:
