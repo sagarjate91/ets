@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Reports - ETS Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+        body { background-color: #ecf0f1; }
+        .navbar { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); }
+        .sidebar { background: var(--primary-color); min-height: 100vh; }
+        .sidebar a { color: #ecf0f1; padding: 0.75rem 1.5rem; display: block; text-decoration: none; }
+        .sidebar a:hover, .sidebar a.active { background-color: var(--secondary-color); }
+        .main-content { padding: 2rem; }
+        .card { border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+        .week-nav {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .report-card { transition: transform 0.15s; }
+        .report-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
+        .day-header {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .employee-chip {
+            display: inline-block;
+            background: #e8f4fd;
+            color: var(--primary-color);
+            border-radius: 20px;
+            padding: 2px 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .section-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 2px; }
+        .section-content { font-size: 0.85rem; color: #2c3e50; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><i class="fas fa-users"></i> ETS Admin</a>
+            <div class="ms-auto">
+                <a href="/logout" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 sidebar">
+                <ul class="nav flex-column pt-3">
+                    <li><a href="/admin/dashboard"><i class="fas fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="/admin/employees"><i class="fas fa-users"></i> Employees</a></li>
+                    <li><a href="/admin/departments"><i class="fas fa-sitemap"></i> Departments</a></li>
+                    <li><a href="/admin/attendance"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+                    <li><a href="/admin/leaves"><i class="fas fa-calendar-alt"></i> Leave Requests</a></li>
+                    <li><a href="/admin/daily-reports" class="active"><i class="fas fa-book-open"></i> Daily Reports</a></li>
+                    <li><a href="/admin/users"><i class="fas fa-user-tie"></i> Users</a></li>
+                </ul>
+            </nav>
+
+            <main class="col-md-10 main-content">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4><i class="fas fa-calendar-week text-primary"></i> Weekly Report Diary</h4>
+                    <a href="/admin/daily-reports" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-list"></i> List View
+                    </a>
+                </div>
+
+                <!-- Week navigation -->
+                <div class="week-nav d-flex justify-content-between align-items-center mb-4">
+                    <a th:href="@{/admin/daily-reports/weekly(weekDate=${prevWeek}, employeeId=${selectedEmployeeId})}"
+                       class="btn btn-outline-secondary">
+                        <i class="fas fa-chevron-left"></i> Previous Week
+                    </a>
+                    <div class="text-center">
+                        <strong class="fs-5" th:text="${#temporals.format(weekStart, 'MMMM dd')} + ' – ' + ${#temporals.format(weekEnd, 'MMMM dd, yyyy')}">Week</strong>
+                        <div class="text-muted small" th:text="${reports.size()} + ' report(s) this week'">0 reports</div>
+                    </div>
+                    <a th:href="@{/admin/daily-reports/weekly(weekDate=${nextWeek}, employeeId=${selectedEmployeeId})}"
+                       class="btn btn-outline-secondary">
+                        Next Week <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+
+                <!-- Employee filter -->
+                <div class="card mb-4">
+                    <div class="card-body py-2">
+                        <form method="get" action="/admin/daily-reports/weekly" class="row g-2 align-items-end">
+                            <input type="hidden" name="weekDate" th:value="${weekStart}">
+                            <div class="col-md-4">
+                                <label class="form-label mb-1">Filter by Employee</label>
+                                <select name="employeeId" class="form-select form-select-sm">
+                                    <option value="">All Employees</option>
+                                    <option th:each="emp : ${employees}"
+                                            th:value="${emp.id}"
+                                            th:text="${emp.firstName + ' ' + emp.lastName + ' (' + emp.employeeId + ')'}"
+                                            th:selected="${emp.id == selectedEmployeeId}">Employee</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary btn-sm w-100">
+                                    <i class="fas fa-filter"></i> Apply
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Weekly reports grid -->
+                <div th:if="${reports.isEmpty()}" class="card">
+                    <div class="card-body text-center py-5">
+                        <i class="fas fa-book fa-4x text-muted mb-3"></i>
+                        <p class="text-muted fs-5">No daily reports submitted this week.</p>
+                    </div>
+                </div>
+
+                <div th:if="${not reports.isEmpty()}" class="row">
+                    <div th:each="report : ${reports}" class="col-md-6 col-xl-4 mb-4">
+                        <div class="card report-card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <div class="day-header" th:text="${#temporals.format(report.reportDate, 'EEEE')}">Day</div>
+                                        <div class="fs-6 fw-bold" th:text="${#temporals.format(report.reportDate, 'MMM dd, yyyy')}">Date</div>
+                                    </div>
+                                    <span th:if="${report.status == 'SUBMITTED'}" class="badge bg-success">Submitted</span>
+                                    <span th:if="${report.status == 'DRAFT'}" class="badge bg-warning text-dark">Draft</span>
+                                </div>
+
+                                <div class="employee-chip">
+                                    <i class="fas fa-user"></i>
+                                    <span th:text="${report.employeeName}">Employee</span>
+                                    <small th:text="'(' + ${report.employeeCode} + ')'"></small>
+                                </div>
+                                <div class="text-muted small mb-3" th:text="${report.departmentName}">Dept</div>
+
+                                <div th:if="${report.workSummary != null and !report.workSummary.isEmpty()}" class="mb-2">
+                                    <div class="section-title">Work Summary</div>
+                                    <div class="section-content" th:text="${#strings.abbreviate(report.workSummary, 120)}"></div>
+                                </div>
+
+                                <div th:if="${report.tasksCompleted != null and !report.tasksCompleted.isEmpty()}" class="mb-2">
+                                    <div class="section-title"><i class="fas fa-check-circle text-success"></i> Tasks Completed</div>
+                                    <div class="section-content" th:text="${#strings.abbreviate(report.tasksCompleted, 100)}"></div>
+                                </div>
+
+                                <div th:if="${report.challenges != null and !report.challenges.isEmpty()}" class="mb-2">
+                                    <div class="section-title"><i class="fas fa-exclamation-triangle text-warning"></i> Challenges</div>
+                                    <div class="section-content" th:text="${#strings.abbreviate(report.challenges, 80)}"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent d-flex justify-content-between">
+                                <a th:href="@{/admin/daily-reports/view/{id}(id=${report.id})}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i> View Details
+                                </a>
+                                <a th:href="@{/admin/daily-reports/delete/{id}(id=${report.id})}"
+                                   class="btn btn-sm btn-outline-danger"
+                                   onclick="return confirm('Delete this report?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
