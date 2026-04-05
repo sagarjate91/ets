@@ -73,6 +73,31 @@
       margin: 0 0 8px;
       font-weight: 600;
     }
+    .code-block {
+      background: #f5f6fa;
+      color: #1a1a2e;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 7pt;
+      padding: 8px 12px;
+      border-radius: 0 0 5px 5px;
+      margin: 0 0 14px;
+      white-space: pre;
+      line-height: 1.3;
+      page-break-inside: avoid;
+      border: 1px solid #cdd0e0;
+      border-top: none;
+    }
+    .code-file-header {
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 10pt;
+      font-weight: 700;
+      color: #fff;
+      background: #1a3d85;
+      border-radius: 5px 5px 0 0;
+      padding: 5px 12px;
+      margin-top: 14px;
+      margin-bottom: 0;
+    }
     .diagram svg {
       width: 100%;
       height: auto;
@@ -182,9 +207,24 @@
           <td class="toc-page"></td>
         </tr>
         <tr>
-          <td class="toc-title-text">TESTING</td>
+          <td class="toc-title-text">BACKEND CODE IMPLEMENTATION</td>
           <td class="toc-dots"></td>
           <td class="toc-page">16</td>
+        </tr>
+        <tr>
+          <td class="toc-sub-text">• Configuration Layer</td>
+          <td class="toc-dots"></td>
+          <td class="toc-page">16</td>
+        </tr>
+        <tr>
+          <td class="toc-sub-text">• Model Layer</td>
+          <td class="toc-dots"></td>
+          <td class="toc-page">18</td>
+        </tr>
+        <tr>
+          <td class="toc-sub-text">• Repository, Service &amp; Controller Layers</td>
+          <td class="toc-dots"></td>
+          <td class="toc-page">21</td>
         </tr>
         <tr><td colspan="3" style="padding:2px 0"></td></tr>
         <!-- CHAPTER 6 -->
@@ -194,9 +234,9 @@
           <td class="toc-page"></td>
         </tr>
         <tr>
-          <td class="toc-title-text">RESULT AND APPLICATIONS</td>
+          <td class="toc-title-text">TESTING</td>
           <td class="toc-dots"></td>
-          <td class="toc-page">18</td>
+          <td class="toc-page">28</td>
         </tr>
         <tr><td colspan="3" style="padding:2px 0"></td></tr>
         <!-- CHAPTER 7 -->
@@ -206,9 +246,9 @@
           <td class="toc-page"></td>
         </tr>
         <tr>
-          <td class="toc-title-text">CONCLUSION AND FUTURE SCOPE</td>
+          <td class="toc-title-text">RESULT AND APPLICATIONS</td>
           <td class="toc-dots"></td>
-          <td class="toc-page">24</td>
+          <td class="toc-page">30</td>
         </tr>
         <tr><td colspan="3" style="padding:2px 0"></td></tr>
         <!-- CHAPTER 8 -->
@@ -218,9 +258,21 @@
           <td class="toc-page"></td>
         </tr>
         <tr>
+          <td class="toc-title-text">CONCLUSION AND FUTURE SCOPE</td>
+          <td class="toc-dots"></td>
+          <td class="toc-page">34</td>
+        </tr>
+        <tr><td colspan="3" style="padding:2px 0"></td></tr>
+        <!-- CHAPTER 9 -->
+        <tr>
+          <td class="toc-chapter">CHAPTER 9 :</td>
+          <td class="toc-dots"></td>
+          <td class="toc-page"></td>
+        </tr>
+        <tr>
           <td class="toc-title-text">REFERENCES AND BIBLIOGRAPHY</td>
           <td class="toc-dots"></td>
-          <td class="toc-page">26</td>
+          <td class="toc-page">36</td>
         </tr>
       </tbody>
     </table>
@@ -953,8 +1005,1859 @@
       </svg>
     </div>
   </section>
+  <!-- ============ CHAPTER 5: BACKEND CODE IMPLEMENTATION ============ -->
   <section class="section page-break">
-    <h2>CHAPTER 5 : TESTING</h2>
+    <h2>CHAPTER 5 : BACKEND CODE IMPLEMENTATION</h2>
+    <p>This chapter presents the complete backend source code of the Employee Tracking System, organized by architectural layer: application entry, configuration, model, DTO, repository, service, and controller. All code is written in Java 17 using Spring Boot 4.x conventions.</p>
+    <h3>5.1 Application Entry Point</h3>
+    <p>The main class bootstraps the Spring Boot application context.</p>
+    <div class="code-file-header">EtsApplication.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets</span></div>
+    <pre class="code-block">package com.data.ets;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class EtsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(EtsApplication.class, args);
+	}
+
+}</pre>
+    <h3>5.2 Configuration Layer</h3>
+    <p>The configuration package contains Spring Security setup, custom authentication logic, and the data seeder that initializes sample records on first startup.</p>
+    <div class="code-file-header">SecurityConfig.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.config</span></div>
+    <pre class="code-block">package com.data.ets.config;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+public class SecurityConfig {
+
+    private final UserDetailsService userDetailsService;
+    private final CustomAuthenticationSuccessHandler successHandler;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(csrf -&gt; csrf.disable())
+            .authorizeHttpRequests(authz -&gt; authz
+                .requestMatchers("/", "/login", "/css/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/employee/**").hasRole("EMPLOYEE")
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -&gt; form
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .successHandler(successHandler)
+                .failureUrl("/login?error")
+                .permitAll()
+            )
+            .logout(logout -&gt; logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+            )
+            .exceptionHandling(exception -&gt; exception
+                .accessDeniedPage("/access-denied")
+            );
+
+        return http.build();
+    }
+}</pre>
+    <div class="code-file-header">CustomUserDetailsService.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.config</span></div>
+    <pre class="code-block">package com.data.ets.config;
+
+import com.data.ets.model.User;
+import com.data.ets.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class CustomUserDetailsService implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -&gt; new UsernameNotFoundException("User not found with username: " + username));
+
+        List&lt;GrantedAuthority&gt; authorities = Collections.singletonList(
+                new SimpleGrantedAuthority("ROLE_" + user.getRole().toString())
+        );
+
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .authorities(authorities)
+                .accountExpired(false)
+                .accountLocked(false)
+                .credentialsExpired(false)
+                .disabled(!user.getEnabled())
+                .build();
+    }
+}</pre>
+    <div class="code-file-header">CustomAuthenticationSuccessHandler.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.config</span></div>
+    <pre class="code-block">package com.data.ets.config;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+
+@Component
+public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                        Authentication authentication) throws IOException, ServletException {
+        
+        // Check user's role and redirect accordingly
+        for (GrantedAuthority authority : authentication.getAuthorities()) {
+            if (authority.getAuthority().equals("ROLE_ADMIN")) {
+                setDefaultTargetUrl("/admin/dashboard");
+                break;
+            } else if (authority.getAuthority().equals("ROLE_EMPLOYEE")) {
+                setDefaultTargetUrl("/employee/dashboard");
+                break;
+            }
+        }
+        
+        super.onAuthenticationSuccess(request, response, authentication);
+    }
+}</pre>
+    <div class="code-file-header">DataInitializer.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.config</span></div>
+    <pre class="code-block">package com.data.ets.config;
+
+import com.data.ets.model.*;
+import com.data.ets.repository.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+@Component
+@RequiredArgsConstructor
+public class DataInitializer implements CommandLineRunner {
+
+    private final UserRepository userRepository;
+    private final EmployeeRepository employeeRepository;
+    private final DepartmentRepository departmentRepository;
+    private final AttendanceRepository attendanceRepository;
+    private final LeaveRepository leaveRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public void run(String... args) throws Exception {
+        // Check if data already exists
+        if (userRepository.count() &gt; 0) {
+            return;
+        }
+
+        // Create Departments
+        Department itDept = Department.builder()
+                .name("Information Technology")
+                .description("IT Department")
+                .build();
+        itDept = departmentRepository.save(itDept);
+
+        Department hrDept = Department.builder()
+                .name("Human Resources")
+                .description("HR Department")
+                .build();
+        hrDept = departmentRepository.save(hrDept);
+
+        Department salesDept = Department.builder()
+                .name("Sales")
+                .description("Sales Department")
+                .build();
+        salesDept = departmentRepository.save(salesDept);
+
+        // Create Admin User
+        User adminUser = User.builder()
+                .username("admin")
+                .email("admin@ets.com")
+                .password(passwordEncoder.encode("admin123"))
+                .firstName("Admin")
+                .lastName("User")
+                .role(Role.ADMIN)
+                .enabled(true)
+                .build();
+        userRepository.save(adminUser);
+
+        // Create Employee Users
+        User emp1User = User.builder()
+                .username("emp1")
+                .email("emp1@ets.com")
+                .password(passwordEncoder.encode("emp123"))
+                .firstName("John")
+                .lastName("Doe")
+                .role(Role.EMPLOYEE)
+                .enabled(true)
+                .build();
+        emp1User = userRepository.save(emp1User);
+
+        User emp2User = User.builder()
+                .username("emp2")
+                .email("emp2@ets.com")
+                .password(passwordEncoder.encode("emp123"))
+                .firstName("Jane")
+                .lastName("Smith")
+                .role(Role.EMPLOYEE)
+                .enabled(true)
+                .build();
+        emp2User = userRepository.save(emp2User);
+
+        User emp3User = User.builder()
+                .username("emp3")
+                .email("emp3@ets.com")
+                .password(passwordEncoder.encode("emp123"))
+                .firstName("Mike")
+                .lastName("Johnson")
+                .role(Role.EMPLOYEE)
+                .enabled(true)
+                .build();
+        emp3User = userRepository.save(emp3User);
+
+        // Create Employees
+        Employee emp1 = Employee.builder()
+                .user(emp1User)
+                .employeeId("EMP001")
+                .phoneNumber("9876543210")
+                .dateOfBirth(LocalDate.of(1995, 5, 15))
+                .gender("Male")
+                .department(itDept)
+                .position("Software Engineer")
+                .salary(50000.0)
+                .dateOfJoining(LocalDate.of(2020, 1, 15))
+                .address("123 Main St")
+                .city("New York")
+                .state("NY")
+                .zipCode("10001")
+                .status("ACTIVE")
+                .build();
+        emp1 = employeeRepository.save(emp1);
+
+        Employee emp2 = Employee.builder()
+                .user(emp2User)
+                .employeeId("EMP002")
+                .phoneNumber("9876543211")
+                .dateOfBirth(LocalDate.of(1998, 8, 20))
+                .gender("Female")
+                .department(hrDept)
+                .position("HR Manager")
+                .salary(45000.0)
+                .dateOfJoining(LocalDate.of(2019, 6, 1))
+                .address("456 Oak Ave")
+                .city("Los Angeles")
+                .state("CA")
+                .zipCode("90001")
+                .status("ACTIVE")
+                .build();
+        emp2 = employeeRepository.save(emp2);
+
+        Employee emp3 = Employee.builder()
+                .user(emp3User)
+                .employeeId("EMP003")
+                .phoneNumber("9876543212")
+                .dateOfBirth(LocalDate.of(1992, 3, 10))
+                .gender("Male")
+                .department(salesDept)
+                .position("Sales Executive")
+                .salary(40000.0)
+                .dateOfJoining(LocalDate.of(2021, 3, 15))
+                .address("789 Pine Rd")
+                .city("Chicago")
+                .state("IL")
+                .zipCode("60601")
+                .status("ACTIVE")
+                .build();
+        emp3 = employeeRepository.save(emp3);
+
+        // Create Sample Attendance Records
+        Attendance att1 = Attendance.builder()
+                .employee(emp1)
+                .attendanceDate(LocalDate.now())
+                .checkInTime(LocalDateTime.now().withHour(9).withMinute(0))
+                .checkOutTime(LocalDateTime.now().withHour(17).withMinute(30))
+                .status("PRESENT")
+                .remarks("Regular")
+                .build();
+        attendanceRepository.save(att1);
+
+        Attendance att2 = Attendance.builder()
+                .employee(emp2)
+                .attendanceDate(LocalDate.now())
+                .checkInTime(LocalDateTime.now().withHour(9).withMinute(15))
+                .checkOutTime(LocalDateTime.now().withHour(17).withMinute(45))
+                .status("PRESENT")
+                .remarks("Regular")
+                .build();
+        attendanceRepository.save(att2);
+
+        // Create Sample Leave Requests
+        Leave leave1 = Leave.builder()
+                .employee(emp1)
+                .leaveType("SICK")
+                .startDate(LocalDate.now().plusDays(1))
+                .endDate(LocalDate.now().plusDays(2))
+                .reason("Medical Appointment")
+                .status("PENDING")
+                .build();
+        leaveRepository.save(leave1);
+
+        Leave leave2 = Leave.builder()
+                .employee(emp2)
+                .leaveType("CASUAL")
+                .startDate(LocalDate.now().plusDays(5))
+                .endDate(LocalDate.now().plusDays(7))
+                .reason("Family vacation")
+                .status("APPROVED")
+                .approvedBy("Admin")
+                .approvalDate(LocalDateTime.now())
+                .build();
+        leaveRepository.save(leave2);
+
+        System.out.println("Sample data initialized successfully!");
+    }
+}</pre>
+    <h3>5.3 Model Layer</h3>
+    <p>JPA entity classes mapped to MySQL tables. Lombok annotations reduce boilerplate; <code>@PrePersist</code> / <code>@PreUpdate</code> handle audit timestamps automatically.</p>
+    <div class="code-file-header">Role.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.model</span></div>
+    <pre class="code-block">package com.data.ets.model;
+
+public enum Role {
+    ADMIN,
+    EMPLOYEE
+}</pre>
+    <div class="code-file-header">User.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.model</span></div>
+    <pre class="code-block">package com.data.ets.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
+    @Column(nullable = false)
+    private Boolean enabled = true;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+}</pre>
+    <div class="code-file-header">Employee.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.model</span></div>
+    <pre class="code-block">package com.data.ets.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "employees")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Column(name = "employee_id", unique = true, nullable = false)
+    private String employeeId;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
+
+    @Column(name = "gender")
+    private String gender;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    @Column(name = "position")
+    private String position;
+
+    @Column(name = "salary")
+    private Double salary;
+
+    @Column(name = "date_of_joining")
+    private LocalDate dateOfJoining;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "zip_code")
+    private String zipCode;
+
+    @Column(name = "status")
+    private String status = "ACTIVE";
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+}</pre>
+    <div class="code-file-header">Department.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.model</span></div>
+    <pre class="code-block">package com.data.ets.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity
+@Table(name = "departments")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Department {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String name;
+
+    @Column
+    private String description;
+
+    @OneToMany(mappedBy = "department")
+    private List&lt;Employee&gt; employees;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+}</pre>
+    <div class="code-file-header">Attendance.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.model</span></div>
+    <pre class="code-block">package com.data.ets.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "attendance")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Attendance {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
+
+    @Column(name = "attendance_date", nullable = false)
+    private LocalDate attendanceDate;
+
+    @Column(name = "check_in_time")
+    private LocalDateTime checkInTime;
+
+    @Column(name = "check_out_time")
+    private LocalDateTime checkOutTime;
+
+    @Column(name = "status")
+    private String status; // PRESENT, ABSENT, LATE, ON_LEAVE
+
+    @Column(name = "remarks")
+    private String remarks;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
+}</pre>
+    <div class="code-file-header">Leave.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.model</span></div>
+    <pre class="code-block">package com.data.ets.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "leaves")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Leave {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
+
+    @Column(name = "leave_type", nullable = false)
+    private String leaveType; // SICK, CASUAL, EARNED, UNPAID
+
+    @Column(name = "start_date", nullable = false)
+    private LocalDate startDate;
+
+    @Column(name = "end_date", nullable = false)
+    private LocalDate endDate;
+
+    @Column(name = "reason")
+    private String reason;
+
+    @Column(name = "status")
+    private String status = "PENDING"; // PENDING, APPROVED, REJECTED
+
+    @Column(name = "approved_by")
+    private String approvedBy;
+
+    @Column(name = "approval_date")
+    private LocalDateTime approvalDate;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+}</pre>
+    <h3>5.4 Data Transfer Objects (DTO)</h3>
+    <p>DTOs decouple the API and service layers from JPA entity internals, carrying only the fields needed by each view or operation.</p>
+    <div class="code-file-header">EmployeeDTO.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.dto</span></div>
+    <pre class="code-block">package com.data.ets.dto;
+
+import lombok.*;
+
+import java.time.LocalDate;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class EmployeeDTO {
+    private Long id;
+    private String username;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String employeeId;
+    private String phoneNumber;
+    private LocalDate dateOfBirth;
+    private String gender;
+    private String departmentName;
+    private Long departmentId;
+    private String position;
+    private Double salary;
+    private LocalDate dateOfJoining;
+    private String address;
+    private String city;
+    private String state;
+    private String zipCode;
+    private String status;
+}</pre>
+    <div class="code-file-header">DepartmentDTO.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.dto</span></div>
+    <pre class="code-block">package com.data.ets.dto;
+
+import lombok.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class DepartmentDTO {
+    private Long id;
+    private String name;
+    private String description;
+}</pre>
+    <div class="code-file-header">AttendanceDTO.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.dto</span></div>
+    <pre class="code-block">package com.data.ets.dto;
+
+import lombok.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class AttendanceDTO {
+    private Long id;
+    private Long employeeId;
+    private String employeeName;
+    private LocalDate attendanceDate;
+    private LocalDateTime checkInTime;
+    private LocalDateTime checkOutTime;
+    private String status;
+    private String remarks;
+}</pre>
+    <div class="code-file-header">LeaveDTO.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.dto</span></div>
+    <pre class="code-block">package com.data.ets.dto;
+
+import lombok.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class LeaveDTO {
+    private Long id;
+    private Long employeeId;
+    private String employeeName;
+    private String leaveType;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private String reason;
+    private String status;
+    private String approvedBy;
+    private LocalDateTime approvalDate;
+}</pre>
+    <div class="code-file-header">UserDTO.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.dto</span></div>
+    <pre class="code-block">package com.data.ets.dto;
+
+import lombok.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class UserDTO {
+    private Long id;
+    private String username;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String role;
+    private Boolean enabled;
+}</pre>
+    <h3>5.5 Repository Layer</h3>
+    <p>Spring Data JPA repositories provide CRUD operations and custom query methods with zero boilerplate SQL.</p>
+    <div class="code-file-header">UserRepository.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.repository</span></div>
+    <pre class="code-block">package com.data.ets.repository;
+
+import com.data.ets.model.User;
+import com.data.ets.model.Role;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
+    Optional&lt;User&gt; findByUsername(String username);
+    Optional&lt;User&gt; findByEmail(String email);
+    List&lt;User&gt; findByRole(Role role);
+    List&lt;User&gt; findByEnabled(Boolean enabled);
+}</pre>
+    <div class="code-file-header">EmployeeRepository.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.repository</span></div>
+    <pre class="code-block">package com.data.ets.repository;
+
+import com.data.ets.model.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface EmployeeRepository extends JpaRepository&lt;Employee, Long&gt; {
+    Optional&lt;Employee&gt; findByEmployeeId(String employeeId);
+    Optional&lt;Employee&gt; findByUserId(Long userId);
+    List&lt;Employee&gt; findByDepartmentId(Long departmentId);
+    List&lt;Employee&gt; findByStatus(String status);
+}</pre>
+    <div class="code-file-header">DepartmentRepository.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.repository</span></div>
+    <pre class="code-block">package com.data.ets.repository;
+
+import com.data.ets.model.Department;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface DepartmentRepository extends JpaRepository&lt;Department, Long&gt; {
+    Optional&lt;Department&gt; findByName(String name);
+}</pre>
+    <div class="code-file-header">AttendanceRepository.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.repository</span></div>
+    <pre class="code-block">package com.data.ets.repository;
+
+import com.data.ets.model.Attendance;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Repository
+public interface AttendanceRepository extends JpaRepository&lt;Attendance, Long&gt; {
+    List&lt;Attendance&gt; findByEmployeeId(Long employeeId);
+    List&lt;Attendance&gt; findByAttendanceDate(LocalDate attendanceDate);
+    List&lt;Attendance&gt; findByEmployeeIdAndAttendanceDateBetween(Long employeeId, LocalDate startDate, LocalDate endDate);
+}</pre>
+    <div class="code-file-header">LeaveRepository.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.repository</span></div>
+    <pre class="code-block">package com.data.ets.repository;
+
+import com.data.ets.model.Leave;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Repository
+public interface LeaveRepository extends JpaRepository&lt;Leave, Long&gt; {
+    List&lt;Leave&gt; findByEmployeeId(Long employeeId);
+    List&lt;Leave&gt; findByStatus(String status);
+    List&lt;Leave&gt; findByEmployeeIdAndStatus(Long employeeId, String status);
+    List&lt;Leave&gt; findByStartDateBetween(LocalDate startDate, LocalDate endDate);
+}</pre>
+    <h3>5.6 Service Layer</h3>
+    <p>Service classes encapsulate all business logic, including DTO conversion, workflow validation, and approval state transitions.</p>
+    <div class="code-file-header">UserService.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.service</span></div>
+    <pre class="code-block">package com.data.ets.service;
+
+import com.data.ets.dto.UserDTO;
+import com.data.ets.model.Role;
+import com.data.ets.model.User;
+import com.data.ets.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class UserService {
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public User createUser(String username, String email, String password, String firstName, String lastName, Role role) {
+        User user = User.builder()
+                .username(username)
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .firstName(firstName)
+                .lastName(lastName)
+                .role(role)
+                .enabled(true)
+                .build();
+        return userRepository.save(user);
+    }
+
+    public Optional&lt;User&gt; findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public Optional&lt;User&gt; findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public Optional&lt;User&gt; findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public List&lt;User&gt; findAll() {
+        return userRepository.findAll();
+    }
+
+    public List&lt;User&gt; findByRole(Role role) {
+        return userRepository.findByRole(role);
+    }
+
+    public List&lt;UserDTO&gt; getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List&lt;UserDTO&gt; getAllEmployees() {
+        return userRepository.findByRole(Role.EMPLOYEE).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public User updateUser(Long id, User updatedUser) {
+        return userRepository.findById(id).map(user -&gt; {
+            user.setEmail(updatedUser.getEmail());
+            user.setFirstName(updatedUser.getFirstName());
+            user.setLastName(updatedUser.getLastName());
+            user.setEnabled(updatedUser.getEnabled());
+            return userRepository.save(user);
+        }).orElseThrow(() -&gt; new RuntimeException("User not found"));
+    }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public void enableUser(Long id) {
+        userRepository.findById(id).ifPresent(user -&gt; {
+            user.setEnabled(true);
+            userRepository.save(user);
+        });
+    }
+
+    public void disableUser(Long id) {
+        userRepository.findById(id).ifPresent(user -&gt; {
+            user.setEnabled(false);
+            userRepository.save(user);
+        });
+    }
+
+    private UserDTO convertToDTO(User user) {
+        return UserDTO.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .role(user.getRole().toString())
+                .enabled(user.getEnabled())
+                .build();
+    }
+}</pre>
+    <div class="code-file-header">EmployeeService.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.service</span></div>
+    <pre class="code-block">package com.data.ets.service;
+
+import com.data.ets.dto.EmployeeDTO;
+import com.data.ets.model.Employee;
+import com.data.ets.model.User;
+import com.data.ets.repository.EmployeeRepository;
+import com.data.ets.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class EmployeeService {
+    private final EmployeeRepository employeeRepository;
+    private final UserRepository userRepository;
+
+    public Employee createEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    public Optional&lt;Employee&gt; findById(Long id) {
+        return employeeRepository.findById(id);
+    }
+
+    public Optional&lt;Employee&gt; findByEmployeeId(String employeeId) {
+        return employeeRepository.findByEmployeeId(employeeId);
+    }
+
+    public Optional&lt;Employee&gt; findByUserId(Long userId) {
+        return employeeRepository.findByUserId(userId);
+    }
+
+    public List&lt;Employee&gt; findAll() {
+        return employeeRepository.findAll();
+    }
+
+    public List&lt;Employee&gt; findByDepartmentId(Long departmentId) {
+        return employeeRepository.findByDepartmentId(departmentId);
+    }
+
+    public List&lt;Employee&gt; findByStatus(String status) {
+        return employeeRepository.findByStatus(status);
+    }
+
+    public List&lt;EmployeeDTO&gt; getAllEmployees() {
+        return employeeRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public EmployeeDTO getEmployeeDTO(Long id) {
+        return employeeRepository.findById(id)
+                .map(this::convertToDTO)
+                .orElseThrow(() -&gt; new RuntimeException("Employee not found"));
+    }
+
+    public Employee updateEmployee(Long id, Employee updatedEmployee) {
+        return employeeRepository.findById(id).map(employee -&gt; {
+            employee.setPhoneNumber(updatedEmployee.getPhoneNumber());
+            employee.setDateOfBirth(updatedEmployee.getDateOfBirth());
+            employee.setGender(updatedEmployee.getGender());
+            employee.setDepartment(updatedEmployee.getDepartment());
+            employee.setPosition(updatedEmployee.getPosition());
+            employee.setSalary(updatedEmployee.getSalary());
+            employee.setAddress(updatedEmployee.getAddress());
+            employee.setCity(updatedEmployee.getCity());
+            employee.setState(updatedEmployee.getState());
+            employee.setZipCode(updatedEmployee.getZipCode());
+            employee.setStatus(updatedEmployee.getStatus());
+            return employeeRepository.save(employee);
+        }).orElseThrow(() -&gt; new RuntimeException("Employee not found"));
+    }
+
+    public void deleteEmployee(Long id) {
+        employeeRepository.deleteById(id);
+    }
+
+    public EmployeeDTO convertToDTO(Employee employee) {
+        return EmployeeDTO.builder()
+                .id(employee.getId())
+                .username(employee.getUser().getUsername())
+                .email(employee.getUser().getEmail())
+                .firstName(employee.getUser().getFirstName())
+                .lastName(employee.getUser().getLastName())
+                .employeeId(employee.getEmployeeId())
+                .phoneNumber(employee.getPhoneNumber())
+                .dateOfBirth(employee.getDateOfBirth())
+                .gender(employee.getGender())
+                .departmentName(employee.getDepartment() != null ? employee.getDepartment().getName() : null)
+                .departmentId(employee.getDepartment() != null ? employee.getDepartment().getId() : null)
+                .position(employee.getPosition())
+                .salary(employee.getSalary())
+                .dateOfJoining(employee.getDateOfJoining())
+                .address(employee.getAddress())
+                .city(employee.getCity())
+                .state(employee.getState())
+                .zipCode(employee.getZipCode())
+                .status(employee.getStatus())
+                .build();
+    }
+}</pre>
+    <div class="code-file-header">DepartmentService.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.service</span></div>
+    <pre class="code-block">package com.data.ets.service;
+
+import com.data.ets.dto.DepartmentDTO;
+import com.data.ets.model.Department;
+import com.data.ets.repository.DepartmentRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class DepartmentService {
+    private final DepartmentRepository departmentRepository;
+
+    public Department createDepartment(Department department) {
+        return departmentRepository.save(department);
+    }
+
+    public Optional&lt;Department&gt; findById(Long id) {
+        return departmentRepository.findById(id);
+    }
+
+    public Optional&lt;Department&gt; findByName(String name) {
+        return departmentRepository.findByName(name);
+    }
+
+    public List&lt;Department&gt; findAll() {
+        return departmentRepository.findAll();
+    }
+
+    public List&lt;DepartmentDTO&gt; getAllDepartments() {
+        return departmentRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Department updateDepartment(Long id, Department updatedDepartment) {
+        return departmentRepository.findById(id).map(department -&gt; {
+            department.setName(updatedDepartment.getName());
+            department.setDescription(updatedDepartment.getDescription());
+            return departmentRepository.save(department);
+        }).orElseThrow(() -&gt; new RuntimeException("Department not found"));
+    }
+
+    public void deleteDepartment(Long id) {
+        departmentRepository.deleteById(id);
+    }
+
+    private DepartmentDTO convertToDTO(Department department) {
+        return DepartmentDTO.builder()
+                .id(department.getId())
+                .name(department.getName())
+                .description(department.getDescription())
+                .build();
+    }
+}</pre>
+    <div class="code-file-header">AttendanceService.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.service</span></div>
+    <pre class="code-block">package com.data.ets.service;
+
+import com.data.ets.dto.AttendanceDTO;
+import com.data.ets.model.Attendance;
+import com.data.ets.model.Employee;
+import com.data.ets.repository.AttendanceRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class AttendanceService {
+    private final AttendanceRepository attendanceRepository;
+
+    public Attendance checkIn(Long employeeId) {
+        Employee employee = new Employee();
+        employee.setId(employeeId);
+        Attendance attendance = new Attendance();
+        attendance.setEmployee(employee);
+        attendance.setAttendanceDate(LocalDate.now());
+        attendance.setCheckInTime(LocalDateTime.now());
+        attendance.setStatus("PRESENT");
+        return attendanceRepository.save(attendance);
+    }
+
+    public Attendance checkOut(Long attendanceId) {
+        return attendanceRepository.findById(attendanceId).map(attendance -&gt; {
+            attendance.setCheckOutTime(LocalDateTime.now());
+            return attendanceRepository.save(attendance);
+        }).orElseThrow(() -&gt; new RuntimeException("Attendance record not found"));
+    }
+
+    public Attendance createAttendance(Attendance attendance) {
+        return attendanceRepository.save(attendance);
+    }
+
+    public Optional&lt;Attendance&gt; findById(Long id) {
+        return attendanceRepository.findById(id);
+    }
+
+    public List&lt;Attendance&gt; findByEmployeeId(Long employeeId) {
+        return attendanceRepository.findByEmployeeId(employeeId);
+    }
+
+    public List&lt;Attendance&gt; findByAttendanceDate(LocalDate attendanceDate) {
+        return attendanceRepository.findByAttendanceDate(attendanceDate);
+    }
+
+    public List&lt;Attendance&gt; findByEmployeeIdAndDateRange(Long employeeId, LocalDate startDate, LocalDate endDate) {
+        return attendanceRepository.findByEmployeeIdAndAttendanceDateBetween(employeeId, startDate, endDate);
+    }
+
+    public List&lt;AttendanceDTO&gt; getAllAttendance() {
+        return attendanceRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List&lt;AttendanceDTO&gt; getEmployeeAttendance(Long employeeId) {
+        return attendanceRepository.findByEmployeeId(employeeId).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Attendance updateAttendance(Long id, Attendance updatedAttendance) {
+        return attendanceRepository.findById(id).map(attendance -&gt; {
+            attendance.setStatus(updatedAttendance.getStatus());
+            attendance.setRemarks(updatedAttendance.getRemarks());
+            return attendanceRepository.save(attendance);
+        }).orElseThrow(() -&gt; new RuntimeException("Attendance record not found"));
+    }
+
+    public void deleteAttendance(Long id) {
+        attendanceRepository.deleteById(id);
+    }
+
+    private AttendanceDTO convertToDTO(Attendance attendance) {
+        return AttendanceDTO.builder()
+                .id(attendance.getId())
+                .employeeId(attendance.getEmployee().getId())
+                .employeeName(attendance.getEmployee().getUser().getFirstName() + " " + attendance.getEmployee().getUser().getLastName())
+                .attendanceDate(attendance.getAttendanceDate())
+                .checkInTime(attendance.getCheckInTime())
+                .checkOutTime(attendance.getCheckOutTime())
+                .status(attendance.getStatus())
+                .remarks(attendance.getRemarks())
+                .build();
+    }
+}</pre>
+    <div class="code-file-header">LeaveService.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.service</span></div>
+    <pre class="code-block">package com.data.ets.service;
+
+import com.data.ets.dto.LeaveDTO;
+import com.data.ets.model.Leave;
+import com.data.ets.repository.LeaveRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class LeaveService {
+    private final LeaveRepository leaveRepository;
+
+    public Leave createLeave(Leave leave) {
+        leave.setStatus("PENDING");
+        return leaveRepository.save(leave);
+    }
+
+    public Optional&lt;Leave&gt; findById(Long id) {
+        return leaveRepository.findById(id);
+    }
+
+    public List&lt;Leave&gt; findByEmployeeId(Long employeeId) {
+        return leaveRepository.findByEmployeeId(employeeId);
+    }
+
+    public List&lt;Leave&gt; findByStatus(String status) {
+        return leaveRepository.findByStatus(status);
+    }
+
+    public List&lt;Leave&gt; findPendingLeaves() {
+        return leaveRepository.findByStatus("PENDING");
+    }
+
+    public List&lt;Leave&gt; findByEmployeeIdAndStatus(Long employeeId, String status) {
+        return leaveRepository.findByEmployeeIdAndStatus(employeeId, status);
+    }
+
+    public List&lt;LeaveDTO&gt; getAllLeaves() {
+        return leaveRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List&lt;LeaveDTO&gt; getEmployeeLeaves(Long employeeId) {
+        return leaveRepository.findByEmployeeId(employeeId).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List&lt;LeaveDTO&gt; getPendingLeaves() {
+        return leaveRepository.findByStatus("PENDING").stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Leave approveLeave(Long id, String approvedBy) {
+        return leaveRepository.findById(id).map(leave -&gt; {
+            leave.setStatus("APPROVED");
+            leave.setApprovedBy(approvedBy);
+            leave.setApprovalDate(LocalDateTime.now());
+            return leaveRepository.save(leave);
+        }).orElseThrow(() -&gt; new RuntimeException("Leave request not found"));
+    }
+
+    public Leave rejectLeave(Long id, String approvedBy) {
+        return leaveRepository.findById(id).map(leave -&gt; {
+            leave.setStatus("REJECTED");
+            leave.setApprovedBy(approvedBy);
+            leave.setApprovalDate(LocalDateTime.now());
+            return leaveRepository.save(leave);
+        }).orElseThrow(() -&gt; new RuntimeException("Leave request not found"));
+    }
+
+    public Leave updateLeave(Long id, Leave updatedLeave) {
+        return leaveRepository.findById(id).map(leave -&gt; {
+            leave.setLeaveType(updatedLeave.getLeaveType());
+            leave.setStartDate(updatedLeave.getStartDate());
+            leave.setEndDate(updatedLeave.getEndDate());
+            leave.setReason(updatedLeave.getReason());
+            return leaveRepository.save(leave);
+        }).orElseThrow(() -&gt; new RuntimeException("Leave request not found"));
+    }
+
+    public void deleteLeave(Long id) {
+        leaveRepository.deleteById(id);
+    }
+
+    private LeaveDTO convertToDTO(Leave leave) {
+        return LeaveDTO.builder()
+                .id(leave.getId())
+                .employeeId(leave.getEmployee().getId())
+                .employeeName(leave.getEmployee().getUser().getFirstName() + " " + leave.getEmployee().getUser().getLastName())
+                .leaveType(leave.getLeaveType())
+                .startDate(leave.getStartDate())
+                .endDate(leave.getEndDate())
+                .reason(leave.getReason())
+                .status(leave.getStatus())
+                .approvedBy(leave.getApprovedBy())
+                .approvalDate(leave.getApprovalDate())
+                .build();
+    }
+}</pre>
+    <h3>5.7 Controller Layer</h3>
+    <p>Spring MVC controllers handle HTTP routing, delegate to services, populate the Thymeleaf model, and return view names. All admin routes require ROLE_ADMIN; employee routes require ROLE_EMPLOYEE.</p>
+    <div class="code-file-header">HomeController.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.controller</span></div>
+    <pre class="code-block">package com.data.ets.controller;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class HomeController {
+
+    @GetMapping("/")
+    public String home() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+        // Check if user is authenticated
+        if (authentication != null &amp;&amp; authentication.isAuthenticated() &amp;&amp; 
+            !authentication.getPrincipal().equals("anonymousUser")) {
+            
+            // Check user's role and redirect accordingly
+            if (authentication.getAuthorities().stream()
+                    .anyMatch(auth -&gt; auth.getAuthority().equals("ROLE_ADMIN"))) {
+                return "redirect:/admin/dashboard";
+            } else if (authentication.getAuthorities().stream()
+                    .anyMatch(auth -&gt; auth.getAuthority().equals("ROLE_EMPLOYEE"))) {
+                return "redirect:/employee/dashboard";
+            }
+        }
+        
+        return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "access-denied";
+    }
+}</pre>
+    <div class="code-file-header">AdminController.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.controller</span></div>
+    <pre class="code-block">package com.data.ets.controller;
+
+import com.data.ets.dto.EmployeeDTO;
+import com.data.ets.model.Department;
+import com.data.ets.model.Employee;
+import com.data.ets.model.Role;
+import com.data.ets.model.User;
+import com.data.ets.service.DepartmentService;
+import com.data.ets.service.EmployeeService;
+import com.data.ets.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/admin")
+@RequiredArgsConstructor
+public class AdminController {
+    private final UserService userService;
+    private final EmployeeService employeeService;
+    private final DepartmentService departmentService;
+
+    @GetMapping("/dashboard")
+    public String dashboard(Model model) {
+        model.addAttribute("totalEmployees", employeeService.findAll().size());
+        model.addAttribute("totalUsers", userService.findAll().size());
+        model.addAttribute("totalDepartments", departmentService.findAll().size());
+        return "admin/dashboard";
+    }
+
+    // Employee Management
+    @GetMapping("/employees")
+    public String listEmployees(Model model) {
+        List&lt;EmployeeDTO&gt; employees = employeeService.getAllEmployees();
+        model.addAttribute("employees", employees);
+        return "admin/employees/list";
+    }
+
+    @GetMapping("/employees/add")
+    public String addEmployeeForm(Model model) {
+        List&lt;Department&gt; departments = departmentService.findAll();
+        model.addAttribute("departments", departments);
+        model.addAttribute("roles", Role.values());
+        return "admin/employees/add";
+    }
+
+    @PostMapping("/employees/save")
+    public String saveEmployee(@RequestParam String username,
+                               @RequestParam String email,
+                               @RequestParam String password,
+                               @RequestParam String firstName,
+                               @RequestParam String lastName,
+                               @RequestParam String employeeId,
+                               @RequestParam String phoneNumber,
+                               @RequestParam String position,
+                               @RequestParam Double salary,
+                               @RequestParam Long departmentId) {
+        User user = userService.createUser(username, email, password, firstName, lastName, Role.EMPLOYEE);
+        
+        Department department = departmentService.findById(departmentId).orElse(null);
+        Employee employee = Employee.builder()
+                .user(user)
+                .employeeId(employeeId)
+                .phoneNumber(phoneNumber)
+                .position(position)
+                .salary(salary)
+                .department(department)
+                .status("ACTIVE")
+                .build();
+        
+        employeeService.createEmployee(employee);
+        return "redirect:/admin/employees";
+    }
+
+    @GetMapping("/employees/edit/{id}")
+    public String editEmployeeForm(@PathVariable Long id, Model model) {
+        EmployeeDTO employee = employeeService.getEmployeeDTO(id);
+        List&lt;Department&gt; departments = departmentService.findAll();
+        model.addAttribute("employee", employee);
+        model.addAttribute("departments", departments);
+        return "admin/employees/edit";
+    }
+
+    @PostMapping("/employees/update/{id}")
+    public String updateEmployee(@PathVariable Long id,
+                                 @RequestParam String phoneNumber,
+                                 @RequestParam String position,
+                                 @RequestParam Double salary,
+                                 @RequestParam Long departmentId) {
+        Employee employee = employeeService.findById(id)
+                .orElseThrow(() -&gt; new RuntimeException("Employee not found"));
+        
+        employee.setPhoneNumber(phoneNumber);
+        employee.setPosition(position);
+        employee.setSalary(salary);
+        employee.setDepartment(departmentService.findById(departmentId).orElse(null));
+        
+        employeeService.updateEmployee(id, employee);
+        return "redirect:/admin/employees";
+    }
+
+    @GetMapping("/employees/delete/{id}")
+    public String deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        return "redirect:/admin/employees";
+    }
+
+    // Department Management
+    @GetMapping("/departments")
+    public String listDepartments(Model model) {
+        List&lt;Department&gt; departments = departmentService.findAll();
+        model.addAttribute("departments", departments);
+        return "admin/departments/list";
+    }
+
+    @GetMapping("/departments/add")
+    public String addDepartmentForm() {
+        return "admin/departments/add";
+    }
+
+    @PostMapping("/departments/save")
+    public String saveDepartment(@RequestParam String name,
+                                 @RequestParam String description) {
+        Department department = Department.builder()
+                .name(name)
+                .description(description)
+                .build();
+        departmentService.createDepartment(department);
+        return "redirect:/admin/departments";
+    }
+
+    @GetMapping("/departments/edit/{id}")
+    public String editDepartmentForm(@PathVariable Long id, Model model) {
+        Department department = departmentService.findById(id)
+                .orElseThrow(() -&gt; new RuntimeException("Department not found"));
+        model.addAttribute("department", department);
+        return "admin/departments/edit";
+    }
+
+    @PostMapping("/departments/update/{id}")
+    public String updateDepartment(@PathVariable Long id,
+                                   @RequestParam String name,
+                                   @RequestParam String description) {
+        Department department = Department.builder()
+                .name(name)
+                .description(description)
+                .build();
+        departmentService.updateDepartment(id, department);
+        return "redirect:/admin/departments";
+    }
+
+    @GetMapping("/departments/delete/{id}")
+    public String deleteDepartment(@PathVariable Long id) {
+        departmentService.deleteDepartment(id);
+        return "redirect:/admin/departments";
+    }
+
+    // User Management
+    @GetMapping("/users")
+    public String listUsers(Model model) {
+        List&lt;User&gt; users = userService.findAll();
+        model.addAttribute("users", users);
+        return "admin/users/list";
+    }
+
+    @GetMapping("/users/disable/{id}")
+    public String disableUser(@PathVariable Long id) {
+        userService.disableUser(id);
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/users/enable/{id}")
+    public String enableUser(@PathVariable Long id) {
+        userService.enableUser(id);
+        return "redirect:/admin/users";
+    }
+}</pre>
+    <div class="code-file-header">AttendanceController.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.controller</span></div>
+    <pre class="code-block">package com.data.ets.controller;
+
+import com.data.ets.dto.AttendanceDTO;
+import com.data.ets.dto.LeaveDTO;
+import com.data.ets.model.Attendance;
+import com.data.ets.service.AttendanceService;
+import com.data.ets.service.LeaveService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Controller
+@RequestMapping("/admin/attendance")
+@RequiredArgsConstructor
+public class AttendanceController {
+    private final AttendanceService attendanceService;
+
+    @GetMapping
+    public String listAttendance(Model model) {
+        List&lt;AttendanceDTO&gt; attendanceList = attendanceService.getAllAttendance();
+        model.addAttribute("attendanceList", attendanceList);
+        return "admin/attendance/list";
+    }
+
+    @GetMapping("/add")
+    public String addAttendanceForm() {
+        return "admin/attendance/add";
+    }
+
+    @PostMapping("/save")
+    public String saveAttendance(@RequestParam Long employeeId,
+                                 @RequestParam LocalDate attendanceDate,
+                                 @RequestParam String status,
+                                 @RequestParam String remarks) {
+        Attendance attendance = Attendance.builder()
+                .attendanceDate(attendanceDate)
+                .status(status)
+                .remarks(remarks)
+                .build();
+        attendanceService.createAttendance(attendance);
+        return "redirect:/admin/attendance";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editAttendanceForm(@PathVariable Long id, Model model) {
+        Attendance attendance = attendanceService.findById(id)
+                .orElseThrow(() -&gt; new RuntimeException("Attendance not found"));
+        model.addAttribute("attendance", attendance);
+        return "admin/attendance/edit";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateAttendance(@PathVariable Long id,
+                                   @RequestParam String status,
+                                   @RequestParam String remarks) {
+        Attendance attendance = Attendance.builder()
+                .status(status)
+                .remarks(remarks)
+                .build();
+        attendanceService.updateAttendance(id, attendance);
+        return "redirect:/admin/attendance";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteAttendance(@PathVariable Long id) {
+        attendanceService.deleteAttendance(id);
+        return "redirect:/admin/attendance";
+    }
+}</pre>
+    <div class="code-file-header">EmployeeController.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.controller</span></div>
+    <pre class="code-block">package com.data.ets.controller;
+
+import com.data.ets.dto.AttendanceDTO;
+import com.data.ets.dto.EmployeeDTO;
+import com.data.ets.dto.LeaveDTO;
+import com.data.ets.model.Attendance;
+import com.data.ets.model.Employee;
+import com.data.ets.model.Leave;
+import com.data.ets.service.AttendanceService;
+import com.data.ets.service.EmployeeService;
+import com.data.ets.service.LeaveService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Controller
+@RequestMapping("/employee")
+@RequiredArgsConstructor
+public class EmployeeController {
+    private final EmployeeService employeeService;
+    private final AttendanceService attendanceService;
+    private final LeaveService leaveService;
+
+    @GetMapping("/dashboard")
+    public String dashboard(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        Employee employee = employeeService.findAll().stream()
+                .filter(e -&gt; e.getUser().getUsername().equals(username))
+                .findFirst()
+                .orElse(null);
+        
+        if (employee != null) {
+            model.addAttribute("employee", employeeService.convertToDTO(employee));
+            model.addAttribute("recentAttendance", attendanceService.getEmployeeAttendance(employee.getId()));
+            model.addAttribute("pendingLeaves", leaveService.getEmployeeLeaves(employee.getId()).stream()
+                    .filter(l -&gt; l.getStatus().equals("PENDING"))
+                    .toList());
+        }
+        
+        return "employee/dashboard";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        Employee employee = employeeService.findAll().stream()
+                .filter(e -&gt; e.getUser().getUsername().equals(username))
+                .findFirst()
+                .orElse(null);
+        
+        if (employee != null) {
+            model.addAttribute("employee", employeeService.convertToDTO(employee));
+        }
+        
+        return "employee/profile";
+    }
+
+    // Attendance
+    @GetMapping("/attendance")
+    public String listAttendance(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        Employee employee = employeeService.findAll().stream()
+                .filter(e -&gt; e.getUser().getUsername().equals(username))
+                .findFirst()
+                .orElse(null);
+        
+        if (employee != null) {
+            List&lt;AttendanceDTO&gt; attendanceList = attendanceService.getEmployeeAttendance(employee.getId());
+            model.addAttribute("attendanceList", attendanceList);
+            model.addAttribute("totalPresent", attendanceList.stream().filter(a -&gt; a.getStatus().equals("PRESENT")).count());
+            model.addAttribute("totalAbsent", attendanceList.stream().filter(a -&gt; a.getStatus().equals("ABSENT")).count());
+            model.addAttribute("totalLate", attendanceList.stream().filter(a -&gt; a.getStatus().equals("LATE")).count());
+        }
+        
+        return "employee/attendance";
+    }
+
+    @PostMapping("/attendance/check-in")
+    public String checkIn(Authentication authentication) {
+        String username = authentication.getName();
+        Employee employee = employeeService.findAll().stream()
+                .filter(e -&gt; e.getUser().getUsername().equals(username))
+                .findFirst()
+                .orElse(null);
+        
+        if (employee != null) {
+            attendanceService.checkIn(employee.getId());
+        }
+        
+        return "redirect:/employee/attendance";
+    }
+
+    @PostMapping("/attendance/check-out/{attendanceId}")
+    public String checkOut(@PathVariable Long attendanceId) {
+        attendanceService.checkOut(attendanceId);
+        return "redirect:/employee/attendance";
+    }
+
+    // Leave Management
+    @GetMapping("/leaves")
+    public String listLeaves(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        Employee employee = employeeService.findAll().stream()
+                .filter(e -&gt; e.getUser().getUsername().equals(username))
+                .findFirst()
+                .orElse(null);
+        
+        if (employee != null) {
+            List&lt;LeaveDTO&gt; leaves = leaveService.getEmployeeLeaves(employee.getId());
+            model.addAttribute("leaves", leaves);
+            model.addAttribute("approved", leaves.stream().filter(l -&gt; l.getStatus().equals("APPROVED")).count());
+            model.addAttribute("pending", leaves.stream().filter(l -&gt; l.getStatus().equals("PENDING")).count());
+            model.addAttribute("rejected", leaves.stream().filter(l -&gt; l.getStatus().equals("REJECTED")).count());
+        }
+        
+        return "employee/leaves";
+    }
+
+    @GetMapping("/leaves/apply")
+    public String applyLeaveForm() {
+        return "employee/apply-leave";
+    }
+
+    @PostMapping("/leaves/save")
+    public String applyLeave(Authentication authentication,
+                            @RequestParam String leaveType,
+                            @RequestParam LocalDate startDate,
+                            @RequestParam LocalDate endDate,
+                            @RequestParam String reason) {
+        String username = authentication.getName();
+        Employee employee = employeeService.findAll().stream()
+                .filter(e -&gt; e.getUser().getUsername().equals(username))
+                .findFirst()
+                .orElse(null);
+        
+        if (employee != null) {
+            Leave leave = Leave.builder()
+                    .employee(employee)
+                    .leaveType(leaveType)
+                    .startDate(startDate)
+                    .endDate(endDate)
+                    .reason(reason)
+                    .status("PENDING")
+                    .build();
+            leaveService.createLeave(leave);
+        }
+        
+        return "redirect:/employee/leaves";
+    }
+}</pre>
+    <div class="code-file-header">LeaveController.java &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— com.data.ets.controller</span></div>
+    <pre class="code-block">package com.data.ets.controller;
+
+import com.data.ets.dto.LeaveDTO;
+import com.data.ets.service.LeaveService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/admin/leaves")
+@RequiredArgsConstructor
+public class LeaveController {
+    private final LeaveService leaveService;
+
+    @GetMapping
+    public String listLeaves(Model model) {
+        List&lt;LeaveDTO&gt; leaves = leaveService.getAllLeaves();
+        model.addAttribute("leaves", leaves);
+        return "admin/leaves/list";
+    }
+
+    @GetMapping("/pending")
+    public String pendingLeaves(Model model) {
+        List&lt;LeaveDTO&gt; pendingLeaves = leaveService.getPendingLeaves();
+        model.addAttribute("leaves", pendingLeaves);
+        return "admin/leaves/pending";
+    }
+
+    @PostMapping("/approve/{id}")
+    public String approveLeave(@PathVariable Long id, @RequestParam String approvedBy) {
+        leaveService.approveLeave(id, approvedBy);
+        return "redirect:/admin/leaves/pending";
+    }
+
+    @PostMapping("/reject/{id}")
+    public String rejectLeave(@PathVariable Long id, @RequestParam String approvedBy) {
+        leaveService.rejectLeave(id, approvedBy);
+        return "redirect:/admin/leaves/pending";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteLeave(@PathVariable Long id) {
+        leaveService.deleteLeave(id);
+        return "redirect:/admin/leaves";
+    }
+}</pre>
+  </section>
+
+  <section class="section page-break">
+    <h2>CHAPTER 6 : TESTING</h2>
     <p>
       The project is validated through unit and integration test setup in Maven, route access verification by role, form validation checks,
       and end-to-end functional flow testing for attendance and leave operations.
@@ -974,8 +2877,8 @@
   </section>
 
   <section class="section page-break">
-    <h2>CHAPTER 6 : RESULT AND APPLICATIONS</h2>
-    <h3>6.1 Project Results and Outcomes</h3>
+    <h2>CHAPTER 7 : RESULT AND APPLICATIONS</h2>
+    <h3>7.1 Project Results and Outcomes</h3>
     <p>
       The final solution successfully delivers all targeted modules and provides a robust base for future enterprise extensions. The platform improves process consistency,
       decreases manual effort, and increases visibility over employee activities.
@@ -986,7 +2889,7 @@
   </section>
 
   <section class="section">
-    <h3>6.2 Challenges and Solutions</h3>
+    <h3>7.2 Challenges and Solutions</h3>
     <table>
       <thead>
         <tr><th>Challenge</th><th>Approach</th><th>Outcome</th></tr>
@@ -1001,8 +2904,8 @@
   </section>
 
   <section class="section page-break">
-    <h2>CHAPTER 7 : CONCLUSION AND FUTURE SCOPE</h2>
-    <h3>7.1 Future Enhancements</h3>
+    <h2>CHAPTER 8 : CONCLUSION AND FUTURE SCOPE</h2>
+    <h3>8.1 Future Enhancements</h3>
     <ul>
       <li>Email and in-app notifications for leave decisions.</li>
       <li>Advanced analytics dashboard and PDF/Excel reporting.</li>
@@ -1013,7 +2916,7 @@
   </section>
 
   <section class="section">
-    <h3>7.2 Conclusion</h3>
+    <h3>8.2 Conclusion</h3>
     <p>
       The Employee Tracking System capstone project demonstrates end-to-end full-stack development with secure architecture and practical business workflows.
       It satisfies major HR operational requirements and serves as a strong foundation for production-grade expansion.
@@ -1021,7 +2924,7 @@
   </section>
 
   <section class="section page-break">
-    <h2>CHAPTER 8 : REFERENCES AND BIBLIOGRAPHY</h2>
+    <h2>CHAPTER 9 : REFERENCES AND BIBLIOGRAPHY</h2>
     <ul>
       <li>Spring Boot Official Documentation</li>
       <li>Spring Security Reference Guide</li>
