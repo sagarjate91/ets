@@ -98,6 +98,38 @@
       margin-top: 14px;
       margin-bottom: 0;
     }
+        .snapshot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin: 10px 0 14px;
+        }
+        .snapshot-card {
+            border: 1px solid #cfd8ea;
+            border-radius: 8px;
+            background: #fbfdff;
+            padding: 8px;
+            page-break-inside: avoid;
+        }
+        .snapshot-head {
+            font-family: "Segoe UI", Arial, sans-serif;
+            font-size: 10pt;
+            font-weight: 700;
+            color: #0b3d91;
+            margin-bottom: 6px;
+        }
+        .snapshot-frame {
+            border: 1px solid #c5cbe0;
+            border-radius: 6px;
+            background: #fff;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+        .snapshot-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
     .diagram svg {
       width: 100%;
       height: auto;
@@ -217,14 +249,14 @@
           <td class="toc-page">16</td>
         </tr>
         <tr>
-          <td class="toc-sub-text">• Model Layer</td>
+          <td class="toc-sub-text">• Model, DTO, Repository, Service Layers</td>
           <td class="toc-dots"></td>
           <td class="toc-page">18</td>
         </tr>
         <tr>
-          <td class="toc-sub-text">• Repository, Service &amp; Controller Layers</td>
+          <td class="toc-sub-text">• Controller Layer</td>
           <td class="toc-dots"></td>
-          <td class="toc-page">21</td>
+          <td class="toc-page">24</td>
         </tr>
         <tr><td colspan="3" style="padding:2px 0"></td></tr>
         <!-- CHAPTER 6 -->
@@ -234,9 +266,24 @@
           <td class="toc-page"></td>
         </tr>
         <tr>
-          <td class="toc-title-text">TESTING</td>
+          <td class="toc-title-text">FRONTEND TEMPLATES (THYMELEAF)</td>
           <td class="toc-dots"></td>
           <td class="toc-page">28</td>
+        </tr>
+        <tr>
+          <td class="toc-sub-text">• Shared Layout &amp; Authentication</td>
+          <td class="toc-dots"></td>
+          <td class="toc-page">28</td>
+        </tr>
+        <tr>
+          <td class="toc-sub-text">• Admin Module Templates</td>
+          <td class="toc-dots"></td>
+          <td class="toc-page">30</td>
+        </tr>
+        <tr>
+          <td class="toc-sub-text">• Employee Module Templates</td>
+          <td class="toc-dots"></td>
+          <td class="toc-page">38</td>
         </tr>
         <tr><td colspan="3" style="padding:2px 0"></td></tr>
         <!-- CHAPTER 7 -->
@@ -246,10 +293,25 @@
           <td class="toc-page"></td>
         </tr>
         <tr>
-          <td class="toc-title-text">RESULT AND APPLICATIONS</td>
+                    <td class="toc-title-text">PROJECT PAGE SNAPSHOTS</td>
           <td class="toc-dots"></td>
-          <td class="toc-page">30</td>
+          <td class="toc-page">44</td>
         </tr>
+                <tr>
+                    <td class="toc-sub-text">• Authentication &amp; Shared Pages</td>
+                    <td class="toc-dots"></td>
+                    <td class="toc-page">44</td>
+                </tr>
+                <tr>
+                    <td class="toc-sub-text">• Admin Module Pages</td>
+                    <td class="toc-dots"></td>
+                    <td class="toc-page">45</td>
+                </tr>
+                <tr>
+                    <td class="toc-sub-text">• Employee Module Pages</td>
+                    <td class="toc-dots"></td>
+                    <td class="toc-page">47</td>
+                </tr>
         <tr><td colspan="3" style="padding:2px 0"></td></tr>
         <!-- CHAPTER 8 -->
         <tr>
@@ -258,9 +320,9 @@
           <td class="toc-page"></td>
         </tr>
         <tr>
-          <td class="toc-title-text">CONCLUSION AND FUTURE SCOPE</td>
+                    <td class="toc-title-text">TESTING</td>
           <td class="toc-dots"></td>
-          <td class="toc-page">34</td>
+                    <td class="toc-page">49</td>
         </tr>
         <tr><td colspan="3" style="padding:2px 0"></td></tr>
         <!-- CHAPTER 9 -->
@@ -270,9 +332,33 @@
           <td class="toc-page"></td>
         </tr>
         <tr>
-          <td class="toc-title-text">REFERENCES AND BIBLIOGRAPHY</td>
+                    <td class="toc-title-text">RESULT AND APPLICATIONS</td>
           <td class="toc-dots"></td>
-          <td class="toc-page">36</td>
+                    <td class="toc-page">51</td>
+        </tr>
+        <tr><td colspan="3" style="padding:2px 0"></td></tr>
+        <!-- CHAPTER 10 -->
+        <tr>
+          <td class="toc-chapter">CHAPTER 10 :</td>
+          <td class="toc-dots"></td>
+          <td class="toc-page"></td>
+        </tr>
+        <tr>
+                    <td class="toc-title-text">CONCLUSION AND FUTURE SCOPE</td>
+          <td class="toc-dots"></td>
+                    <td class="toc-page">55</td>
+                </tr>
+                <tr><td colspan="3" style="padding:2px 0"></td></tr>
+                <!-- CHAPTER 11 -->
+                <tr>
+                    <td class="toc-chapter">CHAPTER 11 :</td>
+                    <td class="toc-dots"></td>
+                    <td class="toc-page"></td>
+                </tr>
+                <tr>
+                    <td class="toc-title-text">REFERENCES AND BIBLIOGRAPHY</td>
+                    <td class="toc-dots"></td>
+                    <td class="toc-page">57</td>
         </tr>
       </tbody>
     </table>
@@ -2856,8 +2942,3122 @@ public class LeaveController {
 }</pre>
   </section>
 
+  <!-- ============ CHAPTER 6: FRONTEND TEMPLATES ============ -->
   <section class="section page-break">
-    <h2>CHAPTER 6 : TESTING</h2>
+    <h2>CHAPTER 6 : FRONTEND TEMPLATES (THYMELEAF)</h2>
+    <p>This chapter presents the complete Thymeleaf HTML templates used for all views in the Employee Tracking System. Templates are organized from the shared layout and authentication pages through every admin and employee-facing screen.</p>
+    <h3>6.1 Shared Layout &amp; Authentication</h3>
+    <p>The shared <code>layout.html</code> fragment provides the navigation bar and Bootstrap 5 shell reused by all pages. The login page handles credential entry and error feedback, and <code>access-denied.html</code> is shown when authorization fails.</p>
+    <div class="code-file-header">login.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— templates/login.html</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Login - ETS&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        body {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .login-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .login-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: white;
+        }
+
+        .alert {
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .login-footer {
+            text-align: center;
+            padding: 0 2rem 2rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="login-container"&gt;
+        &lt;div class="login-header"&gt;
+            &lt;h1&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS&lt;/h1&gt;
+            &lt;p&gt;Employee Tracking System&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="login-body"&gt;
+            &lt;th:block th:if="${param.error}"&gt;
+                &lt;div class="alert alert-danger" role="alert"&gt;
+                    &lt;i class="fas fa-exclamation-circle"&gt;&lt;/i&gt;
+                    Invalid username or password
+                &lt;/div&gt;
+            &lt;/th:block&gt;
+
+            &lt;th:block th:if="${param.logout}"&gt;
+                &lt;div class="alert alert-success" role="alert"&gt;
+                    &lt;i class="fas fa-check-circle"&gt;&lt;/i&gt;
+                    You have been logged out successfully
+                &lt;/div&gt;
+            &lt;/th:block&gt;
+
+            &lt;form method="post" action="/login"&gt;
+                &lt;div class="form-group"&gt;
+                    &lt;label for="username" class="form-label"&gt;
+                        &lt;i class="fas fa-user"&gt;&lt;/i&gt; Username
+                    &lt;/label&gt;
+                    &lt;input type="text" class="form-control" id="username" name="username" required&gt;
+                &lt;/div&gt;
+
+                &lt;div class="form-group"&gt;
+                    &lt;label for="password" class="form-label"&gt;
+                        &lt;i class="fas fa-lock"&gt;&lt;/i&gt; Password
+                    &lt;/label&gt;
+                    &lt;input type="password" class="form-control" id="password" name="password" required&gt;
+                &lt;/div&gt;
+
+                &lt;button type="submit" class="btn-login"&gt;
+                    &lt;i class="fas fa-sign-in-alt"&gt;&lt;/i&gt; Login
+                &lt;/button&gt;
+            &lt;/form&gt;
+
+            &lt;div class="login-footer"&gt;
+
+                &lt;p&gt;Demo Credentials:&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Admin:&lt;/strong&gt; admin / admin123&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">layout.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— templates/layout.html</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Employee Tracking System&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --light-bg: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+            padding-top: 2rem;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            display: block;
+            padding: 0.75rem 1.5rem;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: var(--secondary-color);
+            border-left-color: #fff;
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .badge {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h6 {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .alert-info {
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+            color: #0c5460;
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;
+                &lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS
+            &lt;/a&gt;
+            &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&gt;
+                &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+                &lt;ul class="navbar-nav ms-auto"&gt;
+                    &lt;li class="nav-item dropdown"&gt;
+                        &lt;a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"&gt;
+                            &lt;i class="fas fa-user-circle"&gt;&lt;/i&gt; &lt;span sec:authentication="name"&gt;&lt;/span&gt;
+                        &lt;/a&gt;
+                        &lt;ul class="dropdown-menu dropdown-menu-end"&gt;
+                            &lt;li&gt;&lt;a class="dropdown-item" href="/employee/profile"&gt;&lt;i class="fas fa-user"&gt;&lt;/i&gt; Profile&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;hr class="dropdown-divider"&gt;&lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;form method="POST" action="/logout"&gt;
+                                    &lt;button class="dropdown-item" type="submit"&gt;&lt;i class="fas fa-sign-out-alt"&gt;&lt;/i&gt; Logout&lt;/button&gt;
+                                &lt;/form&gt;
+                            &lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 d-md-block sidebar" sec:authorize="hasRole('ADMIN')"&gt;
+                &lt;div class="position-sticky"&gt;
+                    &lt;ul class="nav flex-column"&gt;
+                        &lt;li class="nav-item"&gt;
+                            &lt;a class="nav-link" href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li class="nav-item"&gt;
+                            &lt;a class="nav-link" href="/admin/employees"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; Employees&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li class="nav-item"&gt;
+                            &lt;a class="nav-link" href="/admin/departments"&gt;&lt;i class="fas fa-sitemap"&gt;&lt;/i&gt; Departments&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li class="nav-item"&gt;
+                            &lt;a class="nav-link" href="/admin/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li class="nav-item"&gt;
+                            &lt;a class="nav-link" href="/admin/leaves"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; Leave Requests&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li class="nav-item"&gt;
+                            &lt;a class="nav-link" href="/admin/users"&gt;&lt;i class="fas fa-user-tie"&gt;&lt;/i&gt; Users&lt;/a&gt;
+                        &lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+            &lt;/nav&gt;
+
+            &lt;nav class="col-md-2 d-md-block sidebar" sec:authorize="hasRole('EMPLOYEE')"&gt;
+                &lt;div class="position-sticky"&gt;
+                    &lt;ul class="nav flex-column"&gt;
+                        &lt;li class="nav-item"&gt;
+                            &lt;a class="nav-link" href="/employee/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li class="nav-item"&gt;
+                            &lt;a class="nav-link" href="/employee/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li class="nav-item"&gt;
+                            &lt;a class="nav-link" href="/employee/leaves"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; My Leaves&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li class="nav-item"&gt;
+                            &lt;a class="nav-link" href="/employee/profile"&gt;&lt;i class="fas fa-user"&gt;&lt;/i&gt; Profile&lt;/a&gt;
+                        &lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 ms-sm-auto px-md-4 main-content"&gt;
+                &lt;th:block th:include="this"&gt;&lt;/th:block&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2024 Employee Tracking System. All rights reserved.&lt;/p&gt;
+    &lt;/footer&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        // Auto-hide alerts after 5 seconds
+        document.querySelectorAll('.alert').forEach(alert =&gt; {
+            setTimeout(() =&gt; {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            }, 5000);
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">access-denied.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— templates/access-denied.html</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Access Denied&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        body {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .access-denied-container {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 500px;
+        }
+
+        .access-denied-icon {
+            font-size: 5rem;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            border: none;
+            color: white;
+            padding: 0.75rem 2rem;
+        }
+
+        .btn:hover {
+            color: white;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="access-denied-container"&gt;
+        &lt;div class="access-denied-icon"&gt;
+            &lt;i class="fas fa-lock"&gt;&lt;/i&gt;
+        &lt;/div&gt;
+        &lt;h1&gt;Access Denied&lt;/h1&gt;
+        &lt;p&gt;You do not have permission to access this page. Please contact your administrator if you believe this is an error.&lt;/p&gt;
+        &lt;a href="/" class="btn btn-primary"&gt;
+            &lt;i class="fas fa-home"&gt;&lt;/i&gt; Go to Home
+        &lt;/a&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <h3>6.2 Admin Module Templates</h3>
+    <p>Admin screens provide full management capabilities for employees, departments, attendance, leaves, and user accounts through a responsive Bootstrap 5 interface.</p>
+    <div class="code-file-header">admin/dashboard.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Admin Dashboard</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Admin Dashboard - ETS&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            display: block;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+            border-left-color: #fff;
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .stat-card p {
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+            &lt;ul class="navbar-nav ms-auto"&gt;
+                &lt;li class="nav-item dropdown"&gt;
+                    &lt;a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"&gt;
+                        &lt;i class="fas fa-user-circle"&gt;&lt;/i&gt; Admin
+                    &lt;/a&gt;
+                    &lt;ul class="dropdown-menu dropdown-menu-end"&gt;
+                        &lt;li&gt;&lt;a class="dropdown-item" href="/logout"&gt;Logout&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/employees"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; Employees&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/departments"&gt;&lt;i class="fas fa-sitemap"&gt;&lt;/i&gt; Departments&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/leaves"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; Leave Requests&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/users"&gt;&lt;i class="fas fa-user-tie"&gt;&lt;/i&gt; Users&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-md-4"&gt;
+                        &lt;div class="stat-card"&gt;
+                            &lt;div class="number" th:text="${totalEmployees}"&gt;0&lt;/div&gt;
+                            &lt;p&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; Total Employees&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-md-4"&gt;
+                        &lt;div class="stat-card"&gt;
+                            &lt;div class="number" th:text="${totalDepartments}"&gt;0&lt;/div&gt;
+                            &lt;p&gt;&lt;i class="fas fa-sitemap"&gt;&lt;/i&gt; Departments&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-md-4"&gt;
+                        &lt;div class="stat-card"&gt;
+                            &lt;div class="number" th:text="${totalUsers}"&gt;0&lt;/div&gt;
+                            &lt;p&gt;&lt;i class="fas fa-user-tie"&gt;&lt;/i&gt; Total Users&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="row mt-4"&gt;
+                    &lt;div class="col-md-12"&gt;
+                        &lt;div class="card"&gt;
+                            &lt;div class="card-header"&gt;
+                                &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-tachometer-alt"&gt;&lt;/i&gt; Dashboard Overview&lt;/h5&gt;
+                            &lt;/div&gt;
+                            &lt;div class="card-body"&gt;
+                                &lt;div class="alert alert-info"&gt;
+                                    &lt;i class="fas fa-info-circle"&gt;&lt;/i&gt; Welcome to Employee Tracking System Admin Dashboard
+                                &lt;/div&gt;
+                                &lt;p&gt;Use the sidebar menu to navigate through different sections:&lt;/p&gt;
+                                &lt;ul&gt;
+                                    &lt;li&gt;&lt;strong&gt;Employees:&lt;/strong&gt; Manage employee information&lt;/li&gt;
+                                    &lt;li&gt;&lt;strong&gt;Departments:&lt;/strong&gt; Manage company departments&lt;/li&gt;
+                                    &lt;li&gt;&lt;strong&gt;Attendance:&lt;/strong&gt; Track employee attendance&lt;/li&gt;
+                                    &lt;li&gt;&lt;strong&gt;Leave Requests:&lt;/strong&gt; Approve or reject leave requests&lt;/li&gt;
+                                    &lt;li&gt;&lt;strong&gt;Users:&lt;/strong&gt; Manage user accounts&lt;/li&gt;
+                                &lt;/ul&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">admin/employees/list.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Employee List</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Employees - ETS Admin&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .btn-sm {
+            margin: 0.25rem;
+        }
+
+        .table {
+            background: white;
+        }
+
+        .badge {
+            padding: 0.5rem 0.75rem;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+            &lt;ul class="navbar-nav ms-auto"&gt;
+                &lt;li class="nav-item dropdown"&gt;
+                    &lt;a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"&gt;
+                        &lt;i class="fas fa-user-circle"&gt;&lt;/i&gt; Admin
+                    &lt;/a&gt;
+                    &lt;ul class="dropdown-menu dropdown-menu-end"&gt;
+                        &lt;li&gt;&lt;a class="dropdown-item" href="/logout"&gt;Logout&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/employees"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; Employees&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/departments"&gt;&lt;i class="fas fa-sitemap"&gt;&lt;/i&gt; Departments&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/leaves"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; Leave Requests&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/users"&gt;&lt;i class="fas fa-user-tie"&gt;&lt;/i&gt; Users&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header d-flex justify-content-between align-items-center"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; Employee Management&lt;/h5&gt;
+                        &lt;a href="/admin/employees/add" class="btn btn-light btn-sm"&gt;
+                            &lt;i class="fas fa-plus"&gt;&lt;/i&gt; Add Employee
+                        &lt;/a&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;div th:if="${employees.isEmpty()}" class="alert alert-info"&gt;
+                            No employees found. &lt;a href="/admin/employees/add"&gt;Add one now&lt;/a&gt;
+                        &lt;/div&gt;
+                        &lt;div th:if="${not employees.isEmpty()}" class="table-responsive"&gt;
+                            &lt;table class="table table-hover"&gt;
+                                &lt;thead class="table-light"&gt;
+                                    &lt;tr&gt;
+                                        &lt;th&gt;Employee ID&lt;/th&gt;
+                                        &lt;th&gt;Name&lt;/th&gt;
+                                        &lt;th&gt;Email&lt;/th&gt;
+                                        &lt;th&gt;Position&lt;/th&gt;
+                                        &lt;th&gt;Department&lt;/th&gt;
+                                        &lt;th&gt;Status&lt;/th&gt;
+                                        &lt;th&gt;Actions&lt;/th&gt;
+                                    &lt;/tr&gt;
+                                &lt;/thead&gt;
+                                &lt;tbody&gt;
+                                    &lt;tr th:each="emp : ${employees}"&gt;
+                                        &lt;td th:text="${emp.employeeId}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${emp.firstName + ' ' + emp.lastName}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${emp.email}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${emp.position}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${emp.departmentName}"&gt;&lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;span th:if="${emp.status == 'ACTIVE'}" class="badge bg-success"&gt;Active&lt;/span&gt;
+                                            &lt;span th:if="${emp.status == 'INACTIVE'}" class="badge bg-danger"&gt;Inactive&lt;/span&gt;
+                                        &lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;a th:href="@{/admin/employees/edit/{id}(id=${emp.id})}" class="btn btn-info btn-sm"&gt;
+                                                &lt;i class="fas fa-edit"&gt;&lt;/i&gt;
+                                            &lt;/a&gt;
+                                            &lt;a th:href="@{/admin/employees/delete/{id}(id=${emp.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"&gt;
+                                                &lt;i class="fas fa-trash"&gt;&lt;/i&gt;
+                                            &lt;/a&gt;
+                                        &lt;/td&gt;
+                                    &lt;/tr&gt;
+                                &lt;/tbody&gt;
+                            &lt;/table&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">admin/employees/add.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Add Employee</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Add Employee - ETS Admin&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/employees"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; Employees&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/departments"&gt;&lt;i class="fas fa-sitemap"&gt;&lt;/i&gt; Departments&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-user-plus"&gt;&lt;/i&gt; Add New Employee&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;form action="/admin/employees/save" method="POST"&gt;
+                            &lt;div class="row"&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="username" class="form-label"&gt;Username *&lt;/label&gt;
+                                        &lt;input type="text" class="form-control" id="username" name="username" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="email" class="form-label"&gt;Email *&lt;/label&gt;
+                                        &lt;input type="email" class="form-control" id="email" name="email" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="row"&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="password" class="form-label"&gt;Password *&lt;/label&gt;
+                                        &lt;input type="password" class="form-control" id="password" name="password" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="employeeId" class="form-label"&gt;Employee ID *&lt;/label&gt;
+                                        &lt;input type="text" class="form-control" id="employeeId" name="employeeId" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="row"&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="firstName" class="form-label"&gt;First Name *&lt;/label&gt;
+                                        &lt;input type="text" class="form-control" id="firstName" name="firstName" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="lastName" class="form-label"&gt;Last Name *&lt;/label&gt;
+                                        &lt;input type="text" class="form-control" id="lastName" name="lastName" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="row"&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="phoneNumber" class="form-label"&gt;Phone Number&lt;/label&gt;
+                                        &lt;input type="tel" class="form-control" id="phoneNumber" name="phoneNumber"&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="position" class="form-label"&gt;Position *&lt;/label&gt;
+                                        &lt;input type="text" class="form-control" id="position" name="position" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="row"&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="salary" class="form-label"&gt;Salary *&lt;/label&gt;
+                                        &lt;input type="number" class="form-control" id="salary" name="salary" step="0.01" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="departmentId" class="form-label"&gt;Department *&lt;/label&gt;
+                                        &lt;select class="form-control" id="departmentId" name="departmentId" required&gt;
+                                            &lt;option value=""&gt;Select Department&lt;/option&gt;
+                                            &lt;option th:each="dept : ${departments}" th:value="${dept.id}" th:text="${dept.name}"&gt;&lt;/option&gt;
+                                        &lt;/select&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="row"&gt;
+                                &lt;div class="col-md-12"&gt;
+                                    &lt;button type="submit" class="btn btn-primary"&gt;
+                                        &lt;i class="fas fa-save"&gt;&lt;/i&gt; Save Employee
+                                    &lt;/button&gt;
+                                    &lt;a href="/admin/employees" class="btn btn-secondary"&gt;
+                                        &lt;i class="fas fa-arrow-left"&gt;&lt;/i&gt; Back
+                                    &lt;/a&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/form&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">admin/employees/edit.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Edit Employee</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Edit Employee - ETS Admin&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/employees"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; Employees&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-user-edit"&gt;&lt;/i&gt; Edit Employee&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;form th:action="@{/admin/employees/update/{id}(id=${employee.id})}" method="POST"&gt;
+                            &lt;div class="row"&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="firstName" class="form-label"&gt;First Name&lt;/label&gt;
+                                        &lt;input type="text" class="form-control" id="firstName" th:value="${employee.firstName}" disabled&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="lastName" class="form-label"&gt;Last Name&lt;/label&gt;
+                                        &lt;input type="text" class="form-control" id="lastName" th:value="${employee.lastName}" disabled&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="row"&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="email" class="form-label"&gt;Email&lt;/label&gt;
+                                        &lt;input type="email" class="form-control" id="email" th:value="${employee.email}" disabled&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="phoneNumber" class="form-label"&gt;Phone Number&lt;/label&gt;
+                                        &lt;input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" th:value="${employee.phoneNumber}"&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="row"&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="position" class="form-label"&gt;Position *&lt;/label&gt;
+                                        &lt;input type="text" class="form-control" id="position" name="position" th:value="${employee.position}" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="salary" class="form-label"&gt;Salary *&lt;/label&gt;
+                                        &lt;input type="number" class="form-control" id="salary" name="salary" th:value="${employee.salary}" step="0.01" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="mb-3"&gt;
+                                &lt;label for="departmentId" class="form-label"&gt;Department *&lt;/label&gt;
+                                &lt;select class="form-control" id="departmentId" name="departmentId" required&gt;
+                                    &lt;option value=""&gt;Select Department&lt;/option&gt;
+                                    &lt;option th:each="dept : ${departments}" th:value="${dept.id}" th:text="${dept.name}" th:selected="${dept.id == employee.departmentId}"&gt;&lt;/option&gt;
+                                &lt;/select&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="mb-3"&gt;
+                                &lt;button type="submit" class="btn btn-primary"&gt;
+                                    &lt;i class="fas fa-save"&gt;&lt;/i&gt; Update
+                                &lt;/button&gt;
+                                &lt;a href="/admin/employees" class="btn btn-secondary"&gt;
+                                    &lt;i class="fas fa-times"&gt;&lt;/i&gt; Cancel
+                                &lt;/a&gt;
+                            &lt;/div&gt;
+                        &lt;/form&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">admin/departments/list.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Department List</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Departments - ETS Admin&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .table {
+            background: white;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/employees"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; Employees&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/departments"&gt;&lt;i class="fas fa-sitemap"&gt;&lt;/i&gt; Departments&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header d-flex justify-content-between align-items-center"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-sitemap"&gt;&lt;/i&gt; Departments&lt;/h5&gt;
+                        &lt;a href="/admin/departments/add" class="btn btn-light btn-sm"&gt;
+                            &lt;i class="fas fa-plus"&gt;&lt;/i&gt; Add Department
+                        &lt;/a&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;div th:if="${departments.isEmpty()}" class="alert alert-info"&gt;
+                            No departments found. &lt;a href="/admin/departments/add"&gt;Create one now&lt;/a&gt;
+                        &lt;/div&gt;
+                        &lt;div th:if="${not departments.isEmpty()}" class="table-responsive"&gt;
+                            &lt;table class="table table-hover"&gt;
+                                &lt;thead class="table-light"&gt;
+                                    &lt;tr&gt;
+                                        &lt;th&gt;Department Name&lt;/th&gt;
+                                        &lt;th&gt;Description&lt;/th&gt;
+                                        &lt;th&gt;Actions&lt;/th&gt;
+                                    &lt;/tr&gt;
+                                &lt;/thead&gt;
+                                &lt;tbody&gt;
+                                    &lt;tr th:each="dept : ${departments}"&gt;
+                                        &lt;td th:text="${dept.name}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${dept.description}"&gt;&lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;a th:href="@{/admin/departments/edit/{id}(id=${dept.id})}" class="btn btn-info btn-sm"&gt;
+                                                &lt;i class="fas fa-edit"&gt;&lt;/i&gt;
+                                            &lt;/a&gt;
+                                            &lt;a th:href="@{/admin/departments/delete/{id}(id=${dept.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"&gt;
+                                                &lt;i class="fas fa-trash"&gt;&lt;/i&gt;
+                                            &lt;/a&gt;
+                                        &lt;/td&gt;
+                                    &lt;/tr&gt;
+                                &lt;/tbody&gt;
+                            &lt;/table&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">admin/departments/add.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Add Department</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Add Department - ETS Admin&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/departments"&gt;&lt;i class="fas fa-sitemap"&gt;&lt;/i&gt; Departments&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-plus-circle"&gt;&lt;/i&gt; Add New Department&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;form action="/admin/departments/save" method="POST"&gt;
+                            &lt;div class="mb-3"&gt;
+                                &lt;label for="name" class="form-label"&gt;Department Name *&lt;/label&gt;
+                                &lt;input type="text" class="form-control" id="name" name="name" required&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="mb-3"&gt;
+                                &lt;label for="description" class="form-label"&gt;Description&lt;/label&gt;
+                                &lt;textarea class="form-control" id="description" name="description" rows="4"&gt;&lt;/textarea&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="mb-3"&gt;
+                                &lt;button type="submit" class="btn btn-primary"&gt;
+                                    &lt;i class="fas fa-save"&gt;&lt;/i&gt; Save Department
+                                &lt;/button&gt;
+                                &lt;a href="/admin/departments" class="btn btn-secondary"&gt;
+                                    &lt;i class="fas fa-arrow-left"&gt;&lt;/i&gt; Back
+                                &lt;/a&gt;
+                            &lt;/div&gt;
+                        &lt;/form&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">admin/departments/edit.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Edit Department</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Edit Department - ETS Admin&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/departments"&gt;&lt;i class="fas fa-sitemap"&gt;&lt;/i&gt; Departments&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-edit"&gt;&lt;/i&gt; Edit Department&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;form th:action="@{/admin/departments/update/{id}(id=${department.id})}" method="POST"&gt;
+                            &lt;div class="mb-3"&gt;
+                                &lt;label for="name" class="form-label"&gt;Department Name *&lt;/label&gt;
+                                &lt;input type="text" class="form-control" id="name" name="name" th:value="${department.name}" required&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="mb-3"&gt;
+                                &lt;label for="description" class="form-label"&gt;Description&lt;/label&gt;
+                                &lt;textarea class="form-control" id="description" name="description" rows="4" th:text="${department.description}"&gt;&lt;/textarea&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="mb-3"&gt;
+                                &lt;button type="submit" class="btn btn-primary"&gt;
+                                    &lt;i class="fas fa-save"&gt;&lt;/i&gt; Update
+                                &lt;/button&gt;
+                                &lt;a href="/admin/departments" class="btn btn-secondary"&gt;
+                                    &lt;i class="fas fa-times"&gt;&lt;/i&gt; Cancel
+                                &lt;/a&gt;
+                            &lt;/div&gt;
+                        &lt;/form&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">admin/attendance/list.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Attendance List</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Attendance Management - ETS Admin&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .table {
+            background: white;
+        }
+
+        .badge {
+            padding: 0.5rem 0.75rem;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/employees"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; Employees&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/departments"&gt;&lt;i class="fas fa-sitemap"&gt;&lt;/i&gt; Departments&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/leaves"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; Leave Requests&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/users"&gt;&lt;i class="fas fa-user-tie"&gt;&lt;/i&gt; Users&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header d-flex justify-content-between align-items-center"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance Management&lt;/h5&gt;
+                        &lt;a href="/admin/attendance/add" class="btn btn-light btn-sm"&gt;
+                            &lt;i class="fas fa-plus"&gt;&lt;/i&gt; Add Record
+                        &lt;/a&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;div th:if="${attendanceList.isEmpty()}" class="alert alert-info"&gt;
+                            No attendance records found
+                        &lt;/div&gt;
+                        &lt;div th:if="${not attendanceList.isEmpty()}" class="table-responsive"&gt;
+                            &lt;table class="table table-hover"&gt;
+                                &lt;thead class="table-light"&gt;
+                                    &lt;tr&gt;
+                                        &lt;th&gt;Employee&lt;/th&gt;
+                                        &lt;th&gt;Date&lt;/th&gt;
+                                        &lt;th&gt;Check In&lt;/th&gt;
+                                        &lt;th&gt;Check Out&lt;/th&gt;
+                                        &lt;th&gt;Status&lt;/th&gt;
+                                        &lt;th&gt;Remarks&lt;/th&gt;
+                                        &lt;th&gt;Actions&lt;/th&gt;
+                                    &lt;/tr&gt;
+                                &lt;/thead&gt;
+                                &lt;tbody&gt;
+                                    &lt;tr th:each="att : ${attendanceList}"&gt;
+                                        &lt;td th:text="${att.employeeName}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${att.attendanceDate}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${att.checkInTime}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${att.checkOutTime}"&gt;&lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;span th:if="${att.status == 'PRESENT'}" class="badge bg-success"&gt;Present&lt;/span&gt;
+                                            &lt;span th:if="${att.status == 'ABSENT'}" class="badge bg-danger"&gt;Absent&lt;/span&gt;
+                                            &lt;span th:if="${att.status == 'LATE'}" class="badge bg-warning"&gt;Late&lt;/span&gt;
+                                        &lt;/td&gt;
+                                        &lt;td th:text="${att.remarks}"&gt;&lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;a th:href="@{/admin/attendance/edit/{id}(id=${att.id})}" class="btn btn-info btn-sm"&gt;
+                                                &lt;i class="fas fa-edit"&gt;&lt;/i&gt;
+                                            &lt;/a&gt;
+                                            &lt;a th:href="@{/admin/attendance/delete/{id}(id=${att.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"&gt;
+                                                &lt;i class="fas fa-trash"&gt;&lt;/i&gt;
+                                            &lt;/a&gt;
+                                        &lt;/td&gt;
+                                    &lt;/tr&gt;
+                                &lt;/tbody&gt;
+                            &lt;/table&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">admin/attendance/add.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Add Attendance</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Add Attendance - ETS Admin&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-plus-circle"&gt;&lt;/i&gt; Add Attendance Record&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;form action="/admin/attendance/save" method="POST"&gt;
+                            &lt;div class="mb-3"&gt;
+                                &lt;label for="employeeId" class="form-label"&gt;Employee ID *&lt;/label&gt;
+                                &lt;input type="number" class="form-control" id="employeeId" name="employeeId" required&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="row"&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="attendanceDate" class="form-label"&gt;Date *&lt;/label&gt;
+                                        &lt;input type="date" class="form-control" id="attendanceDate" name="attendanceDate" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="status" class="form-label"&gt;Status *&lt;/label&gt;
+                                        &lt;select class="form-control" id="status" name="status" required&gt;
+                                            &lt;option value=""&gt;Select Status&lt;/option&gt;
+                                            &lt;option value="PRESENT"&gt;Present&lt;/option&gt;
+                                            &lt;option value="ABSENT"&gt;Absent&lt;/option&gt;
+                                            &lt;option value="LATE"&gt;Late&lt;/option&gt;
+                                            &lt;option value="ON_LEAVE"&gt;On Leave&lt;/option&gt;
+                                        &lt;/select&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="mb-3"&gt;
+                                &lt;label for="remarks" class="form-label"&gt;Remarks&lt;/label&gt;
+                                &lt;textarea class="form-control" id="remarks" name="remarks" rows="3"&gt;&lt;/textarea&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="mb-3"&gt;
+                                &lt;button type="submit" class="btn btn-primary"&gt;
+                                    &lt;i class="fas fa-save"&gt;&lt;/i&gt; Save Record
+                                &lt;/button&gt;
+                                &lt;a href="/admin/attendance" class="btn btn-secondary"&gt;
+                                    &lt;i class="fas fa-arrow-left"&gt;&lt;/i&gt; Back
+                                &lt;/a&gt;
+                            &lt;/div&gt;
+                        &lt;/form&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">admin/attendance/edit.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Edit Attendance</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Edit Attendance - ETS Admin&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-edit"&gt;&lt;/i&gt; Edit Attendance Record&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;form th:action="@{/admin/attendance/update/{id}(id=${attendance.id})}" method="POST"&gt;
+                            &lt;div class="mb-3"&gt;
+                                &lt;label for="status" class="form-label"&gt;Status *&lt;/label&gt;
+                                &lt;select class="form-control" id="status" name="status" required&gt;
+                                    &lt;option value="PRESENT" th:selected="${attendance.status == 'PRESENT'}"&gt;Present&lt;/option&gt;
+                                    &lt;option value="ABSENT" th:selected="${attendance.status == 'ABSENT'}"&gt;Absent&lt;/option&gt;
+                                    &lt;option value="LATE" th:selected="${attendance.status == 'LATE'}"&gt;Late&lt;/option&gt;
+                                    &lt;option value="ON_LEAVE" th:selected="${attendance.status == 'ON_LEAVE'}"&gt;On Leave&lt;/option&gt;
+                                &lt;/select&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="mb-3"&gt;
+                                &lt;label for="remarks" class="form-label"&gt;Remarks&lt;/label&gt;
+                                &lt;textarea class="form-control" id="remarks" name="remarks" rows="3" th:text="${attendance.remarks}"&gt;&lt;/textarea&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="mb-3"&gt;
+                                &lt;button type="submit" class="btn btn-primary"&gt;
+                                    &lt;i class="fas fa-save"&gt;&lt;/i&gt; Update
+                                &lt;/button&gt;
+                                &lt;a href="/admin/attendance" class="btn btn-secondary"&gt;
+                                    &lt;i class="fas fa-arrow-left"&gt;&lt;/i&gt; Back
+                                &lt;/a&gt;
+                            &lt;/div&gt;
+                        &lt;/form&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">admin/leaves/list.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— All Leaves</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Leave Requests - ETS Admin&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .table {
+            background: white;
+        }
+
+        .badge {
+            padding: 0.5rem 0.75rem;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/leaves"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; Leave Requests&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/leaves/pending"&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Pending Approvals&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; Leave Requests&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;div th:if="${leaves.isEmpty()}" class="alert alert-info"&gt;
+                            No leave requests found
+                        &lt;/div&gt;
+                        &lt;div th:if="${not leaves.isEmpty()}" class="table-responsive"&gt;
+                            &lt;table class="table table-hover"&gt;
+                                &lt;thead class="table-light"&gt;
+                                    &lt;tr&gt;
+                                        &lt;th&gt;Employee&lt;/th&gt;
+                                        &lt;th&gt;Type&lt;/th&gt;
+                                        &lt;th&gt;From Date&lt;/th&gt;
+                                        &lt;th&gt;To Date&lt;/th&gt;
+                                        &lt;th&gt;Reason&lt;/th&gt;
+                                        &lt;th&gt;Status&lt;/th&gt;
+                                        &lt;th&gt;Actions&lt;/th&gt;
+                                    &lt;/tr&gt;
+                                &lt;/thead&gt;
+                                &lt;tbody&gt;
+                                    &lt;tr th:each="leave : ${leaves}"&gt;
+                                        &lt;td th:text="${leave.employeeName}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${leave.leaveType}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${leave.startDate}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${leave.endDate}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${leave.reason}"&gt;&lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;span th:if="${leave.status == 'APPROVED'}" class="badge bg-success"&gt;Approved&lt;/span&gt;
+                                            &lt;span th:if="${leave.status == 'PENDING'}" class="badge bg-warning"&gt;Pending&lt;/span&gt;
+                                            &lt;span th:if="${leave.status == 'REJECTED'}" class="badge bg-danger"&gt;Rejected&lt;/span&gt;
+                                        &lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;a th:href="@{/admin/leaves/delete/{id}(id=${leave.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"&gt;
+                                                &lt;i class="fas fa-trash"&gt;&lt;/i&gt;
+                                            &lt;/a&gt;
+                                        &lt;/td&gt;
+                                    &lt;/tr&gt;
+                                &lt;/tbody&gt;
+                            &lt;/table&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">admin/leaves/pending.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Pending Leaves</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Pending Leave Approvals - ETS Admin&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .table {
+            background: white;
+        }
+
+        .badge {
+            padding: 0.5rem 0.75rem;
+        }
+
+        .btn-sm {
+            margin: 0.25rem;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/leaves"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; Leave Requests&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/leaves/pending"&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Pending Approvals&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Pending Leave Approvals&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;div th:if="${leaves.isEmpty()}" class="alert alert-info"&gt;
+                            No pending leave requests
+                        &lt;/div&gt;
+                        &lt;div th:if="${not leaves.isEmpty()}" class="table-responsive"&gt;
+                            &lt;table class="table table-hover"&gt;
+                                &lt;thead class="table-light"&gt;
+                                    &lt;tr&gt;
+                                        &lt;th&gt;Employee&lt;/th&gt;
+                                        &lt;th&gt;Type&lt;/th&gt;
+                                        &lt;th&gt;From Date&lt;/th&gt;
+                                        &lt;th&gt;To Date&lt;/th&gt;
+                                        &lt;th&gt;Reason&lt;/th&gt;
+                                        &lt;th&gt;Actions&lt;/th&gt;
+                                    &lt;/tr&gt;
+                                &lt;/thead&gt;
+                                &lt;tbody&gt;
+                                    &lt;tr th:each="leave : ${leaves}"&gt;
+                                        &lt;td th:text="${leave.employeeName}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${leave.leaveType}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${leave.startDate}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${leave.endDate}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${leave.reason}"&gt;&lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;form th:action="@{/admin/leaves/approve/{id}(id=${leave.id})}" method="POST" style="display:inline;"&gt;
+                                                &lt;input type="hidden" name="approvedBy" value="Admin"&gt;
+                                                &lt;button type="submit" class="btn btn-success btn-sm"&gt;
+                                                    &lt;i class="fas fa-check"&gt;&lt;/i&gt; Approve
+                                                &lt;/button&gt;
+                                            &lt;/form&gt;
+                                            &lt;form th:action="@{/admin/leaves/reject/{id}(id=${leave.id})}" method="POST" style="display:inline;"&gt;
+                                                &lt;input type="hidden" name="approvedBy" value="Admin"&gt;
+                                                &lt;button type="submit" class="btn btn-danger btn-sm"&gt;
+                                                    &lt;i class="fas fa-times"&gt;&lt;/i&gt; Reject
+                                                &lt;/button&gt;
+                                            &lt;/form&gt;
+                                        &lt;/td&gt;
+                                    &lt;/tr&gt;
+                                &lt;/tbody&gt;
+                            &lt;/table&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">admin/users/list.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— User Management</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Users Management - ETS Admin&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .table {
+            background: white;
+        }
+
+        .badge {
+            padding: 0.5rem 0.75rem;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Admin&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/admin/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/employees"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; Employees&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/admin/users"&gt;&lt;i class="fas fa-user-tie"&gt;&lt;/i&gt; Users&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-user-tie"&gt;&lt;/i&gt; User Management&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;div th:if="${users.isEmpty()}" class="alert alert-info"&gt;
+                            No users found
+                        &lt;/div&gt;
+                        &lt;div th:if="${not users.isEmpty()}" class="table-responsive"&gt;
+                            &lt;table class="table table-hover"&gt;
+                                &lt;thead class="table-light"&gt;
+                                    &lt;tr&gt;
+                                        &lt;th&gt;Username&lt;/th&gt;
+                                        &lt;th&gt;Email&lt;/th&gt;
+                                        &lt;th&gt;Name&lt;/th&gt;
+                                        &lt;th&gt;Role&lt;/th&gt;
+                                        &lt;th&gt;Status&lt;/th&gt;
+                                        &lt;th&gt;Actions&lt;/th&gt;
+                                    &lt;/tr&gt;
+                                &lt;/thead&gt;
+                                &lt;tbody&gt;
+                                    &lt;tr th:each="user : ${users}"&gt;
+                                        &lt;td th:text="${user.username}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${user.email}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${user.firstName + ' ' + user.lastName}"&gt;&lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;span th:if="${user.role == 'ADMIN'}" class="badge bg-danger"&gt;Admin&lt;/span&gt;
+                                            &lt;span th:if="${user.role == 'EMPLOYEE'}" class="badge bg-primary"&gt;Employee&lt;/span&gt;
+                                        &lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;span th:if="${user.enabled}" class="badge bg-success"&gt;Enabled&lt;/span&gt;
+                                            &lt;span th:if="${not user.enabled}" class="badge bg-secondary"&gt;Disabled&lt;/span&gt;
+                                        &lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;form th:if="${user.enabled}" th:action="@{/admin/users/disable/{id}(id=${user.id})}" method="GET" style="display:inline;"&gt;
+                                                &lt;button type="submit" class="btn btn-warning btn-sm"&gt;
+                                                    &lt;i class="fas fa-lock"&gt;&lt;/i&gt; Disable
+                                                &lt;/button&gt;
+                                            &lt;/form&gt;
+                                            &lt;form th:if="${not user.enabled}" th:action="@{/admin/users/enable/{id}(id=${user.id})}" method="GET" style="display:inline;"&gt;
+                                                &lt;button type="submit" class="btn btn-success btn-sm"&gt;
+                                                    &lt;i class="fas fa-unlock"&gt;&lt;/i&gt; Enable
+                                                &lt;/button&gt;
+                                            &lt;/form&gt;
+                                        &lt;/td&gt;
+                                    &lt;/tr&gt;
+                                &lt;/tbody&gt;
+                            &lt;/table&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <h3>6.3 Employee Module Templates</h3>
+    <p>Employee-facing pages provide a personal view of attendance records, leave history, and profile information with intuitive check-in/check-out and leave application forms.</p>
+    <div class="code-file-header">employee/dashboard.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Employee Dashboard</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Employee Dashboard - ETS&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Employee&lt;/a&gt;
+            &lt;ul class="navbar-nav ms-auto"&gt;
+                &lt;li class="nav-item dropdown"&gt;
+                    &lt;a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"&gt;
+                        &lt;i class="fas fa-user-circle"&gt;&lt;/i&gt; Employee
+                    &lt;/a&gt;
+                    &lt;ul class="dropdown-menu dropdown-menu-end"&gt;
+                        &lt;li&gt;&lt;a class="dropdown-item" href="/employee/profile"&gt;Profile&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a class="dropdown-item" href="/logout"&gt;Logout&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/employee/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/leaves"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; My Leaves&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/profile"&gt;&lt;i class="fas fa-user"&gt;&lt;/i&gt; Profile&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="row"&gt;
+                    &lt;div class="col-md-6"&gt;
+                        &lt;div class="card mb-4" th:if="${employee}"&gt;
+                            &lt;div class="card-header"&gt;
+                                &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-info-circle"&gt;&lt;/i&gt; My Profile&lt;/h5&gt;
+                            &lt;/div&gt;
+                            &lt;div class="card-body"&gt;
+                                &lt;p&gt;&lt;strong&gt;Name:&lt;/strong&gt; &lt;span th:text="${employee.firstName + ' ' + employee.lastName}"&gt;&lt;/span&gt;&lt;/p&gt;
+                                &lt;p&gt;&lt;strong&gt;Employee ID:&lt;/strong&gt; &lt;span th:text="${employee.employeeId}"&gt;&lt;/span&gt;&lt;/p&gt;
+                                &lt;p&gt;&lt;strong&gt;Position:&lt;/strong&gt; &lt;span th:text="${employee.position}"&gt;&lt;/span&gt;&lt;/p&gt;
+                                &lt;p&gt;&lt;strong&gt;Department:&lt;/strong&gt; &lt;span th:text="${employee.departmentName}"&gt;&lt;/span&gt;&lt;/p&gt;
+                                &lt;p&gt;&lt;strong&gt;Email:&lt;/strong&gt; &lt;span th:text="${employee.email}"&gt;&lt;/span&gt;&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-md-6"&gt;
+                        &lt;div class="card mb-4"&gt;
+                            &lt;div class="card-header"&gt;
+                                &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Quick Actions&lt;/h5&gt;
+                            &lt;/div&gt;
+                            &lt;div class="card-body"&gt;
+                                &lt;a href="/employee/attendance" class="btn btn-primary w-100 mb-2"&gt;
+                                    &lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Mark Attendance
+                                &lt;/a&gt;
+                                &lt;a href="/employee/leaves/apply" class="btn btn-info w-100 mb-2"&gt;
+                                    &lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; Apply Leave
+                                &lt;/a&gt;
+                                &lt;a href="/employee/leaves" class="btn btn-warning w-100"&gt;
+                                    &lt;i class="fas fa-history"&gt;&lt;/i&gt; View Leaves
+                                &lt;/a&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="row"&gt;
+                    &lt;div class="col-md-12"&gt;
+                        &lt;div class="card"&gt;
+                            &lt;div class="card-header"&gt;
+                                &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; Pending Leave Requests&lt;/h5&gt;
+                            &lt;/div&gt;
+                            &lt;div class="card-body"&gt;
+                                &lt;div th:if="${pendingLeaves.isEmpty()}" class="alert alert-info"&gt;
+                                    No pending leave requests
+                                &lt;/div&gt;
+                                &lt;div th:if="${not pendingLeaves.isEmpty()}" class="table-responsive"&gt;
+                                    &lt;table class="table table-hover"&gt;
+                                        &lt;thead class="table-light"&gt;
+                                            &lt;tr&gt;
+                                                &lt;th&gt;Type&lt;/th&gt;
+                                                &lt;th&gt;From Date&lt;/th&gt;
+                                                &lt;th&gt;To Date&lt;/th&gt;
+                                                &lt;th&gt;Status&lt;/th&gt;
+                                            &lt;/tr&gt;
+                                        &lt;/thead&gt;
+                                        &lt;tbody&gt;
+                                            &lt;tr th:each="leave : ${pendingLeaves}"&gt;
+                                                &lt;td th:text="${leave.leaveType}"&gt;&lt;/td&gt;
+                                                &lt;td th:text="${leave.startDate}"&gt;&lt;/td&gt;
+                                                &lt;td th:text="${leave.endDate}"&gt;&lt;/td&gt;
+                                                &lt;td&gt;
+                                                    &lt;span class="badge bg-warning" th:text="${leave.status}"&gt;&lt;/span&gt;
+                                                &lt;/td&gt;
+                                            &lt;/tr&gt;
+                                        &lt;/tbody&gt;
+                                    &lt;/table&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">employee/profile.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Profile View</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Profile - ETS&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .profile-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .profile-info p {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 0.75rem;
+        }
+
+        .profile-info strong {
+            color: var(--primary-color);
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #2c3e50;
+            min-width: 150px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Employee&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/employee/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/leaves"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; My Leaves&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/profile"&gt;&lt;i class="fas fa-user"&gt;&lt;/i&gt; Profile&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card" th:if="${employee}"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-user-circle"&gt;&lt;/i&gt; My Profile&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;div class="profile-info"&gt;
+                            &lt;p&gt;&lt;span class="info-label"&gt;&lt;i class="fas fa-id-card"&gt;&lt;/i&gt; Employee ID:&lt;/span&gt; &lt;span th:text="${employee.employeeId}"&gt;&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span class="info-label"&gt;&lt;i class="fas fa-user"&gt;&lt;/i&gt; Name:&lt;/span&gt; &lt;span th:text="${employee.firstName + ' ' + employee.lastName}"&gt;&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span class="info-label"&gt;&lt;i class="fas fa-envelope"&gt;&lt;/i&gt; Email:&lt;/span&gt; &lt;span th:text="${employee.email}"&gt;&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span class="info-label"&gt;&lt;i class="fas fa-phone"&gt;&lt;/i&gt; Phone:&lt;/span&gt; &lt;span th:text="${employee.phoneNumber}"&gt;&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span class="info-label"&gt;&lt;i class="fas fa-briefcase"&gt;&lt;/i&gt; Position:&lt;/span&gt; &lt;span th:text="${employee.position}"&gt;&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span class="info-label"&gt;&lt;i class="fas fa-building"&gt;&lt;/i&gt; Department:&lt;/span&gt; &lt;span th:text="${employee.departmentName}"&gt;&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span class="info-label"&gt;&lt;i class="fas fa-calendar"&gt;&lt;/i&gt; Date of Joining:&lt;/span&gt; &lt;span th:text="${employee.dateOfJoining}"&gt;&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span class="info-label"&gt;&lt;i class="fas fa-dollar-sign"&gt;&lt;/i&gt; Salary:&lt;/span&gt; &lt;span th:text="${'$' + employee.salary}"&gt;&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span class="info-label"&gt;&lt;i class="fas fa-map-marker"&gt;&lt;/i&gt; Address:&lt;/span&gt; &lt;span th:text="${employee.address}"&gt;&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span class="info-label"&gt;&lt;i class="fas fa-city"&gt;&lt;/i&gt; City:&lt;/span&gt; &lt;span th:text="${employee.city}"&gt;&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span class="info-label"&gt;&lt;i class="fas fa-map"&gt;&lt;/i&gt; State:&lt;/span&gt; &lt;span th:text="${employee.state}"&gt;&lt;/span&gt;&lt;/p&gt;
+                            &lt;p style="border-bottom: none;"&gt;&lt;span class="info-label"&gt;&lt;i class="fas fa-mail-bulk"&gt;&lt;/i&gt; Zip Code:&lt;/span&gt; &lt;span th:text="${employee.zipCode}"&gt;&lt;/span&gt;&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">employee/attendance.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— My Attendance</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Attendance - ETS&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .table {
+            background: white;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Employee&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/employee/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/leaves"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; My Leaves&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/profile"&gt;&lt;i class="fas fa-user"&gt;&lt;/i&gt; Profile&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="row mb-4"&gt;
+                    &lt;div class="col-md-3"&gt;
+                        &lt;div class="stat-card"&gt;
+                            &lt;div class="number" th:text="${totalPresent}"&gt;0&lt;/div&gt;
+                            &lt;p class="text-success"&gt;&lt;i class="fas fa-check-circle"&gt;&lt;/i&gt; Present&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-md-3"&gt;
+                        &lt;div class="stat-card"&gt;
+                            &lt;div class="number" th:text="${totalAbsent}"&gt;0&lt;/div&gt;
+                            &lt;p class="text-danger"&gt;&lt;i class="fas fa-times-circle"&gt;&lt;/i&gt; Absent&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-md-3"&gt;
+                        &lt;div class="stat-card"&gt;
+                            &lt;div class="number" th:text="${totalLate}"&gt;0&lt;/div&gt;
+                            &lt;p class="text-warning"&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Late&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-md-3"&gt;
+                        &lt;form action="/employee/attendance/check-in" method="POST"&gt;
+                            &lt;button type="submit" class="btn btn-success w-100"&gt;
+                                &lt;i class="fas fa-sign-in-alt"&gt;&lt;/i&gt; Check In
+                            &lt;/button&gt;
+                        &lt;/form&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance Records&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;div th:if="${attendanceList.isEmpty()}" class="alert alert-info"&gt;
+                            No attendance records yet
+                        &lt;/div&gt;
+                        &lt;div th:if="${not attendanceList.isEmpty()}" class="table-responsive"&gt;
+                            &lt;table class="table table-hover"&gt;
+                                &lt;thead class="table-light"&gt;
+                                    &lt;tr&gt;
+                                        &lt;th&gt;Date&lt;/th&gt;
+                                        &lt;th&gt;Check In&lt;/th&gt;
+                                        &lt;th&gt;Check Out&lt;/th&gt;
+                                        &lt;th&gt;Status&lt;/th&gt;
+                                        &lt;th&gt;Remarks&lt;/th&gt;
+                                        &lt;th&gt;Action&lt;/th&gt;
+                                    &lt;/tr&gt;
+                                &lt;/thead&gt;
+                                &lt;tbody&gt;
+                                    &lt;tr th:each="att : ${attendanceList}"&gt;
+                                        &lt;td th:text="${att.attendanceDate}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${att.checkInTime}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${att.checkOutTime}"&gt;&lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;span th:if="${att.status == 'PRESENT'}" class="badge bg-success"&gt;Present&lt;/span&gt;
+                                            &lt;span th:if="${att.status == 'ABSENT'}" class="badge bg-danger"&gt;Absent&lt;/span&gt;
+                                            &lt;span th:if="${att.status == 'LATE'}" class="badge bg-warning"&gt;Late&lt;/span&gt;
+                                        &lt;/td&gt;
+                                        &lt;td th:text="${att.remarks}"&gt;&lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;form th:if="${att.checkOutTime == null}" th:action="@{/employee/attendance/check-out/{id}(id=${att.id})}" method="POST" style="display:inline;"&gt;
+                                                &lt;button type="submit" class="btn btn-sm btn-warning"&gt;
+                                                    &lt;i class="fas fa-sign-out-alt"&gt;&lt;/i&gt; Check Out
+                                                &lt;/button&gt;
+                                            &lt;/form&gt;
+                                        &lt;/td&gt;
+                                    &lt;/tr&gt;
+                                &lt;/tbody&gt;
+                            &lt;/table&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">employee/apply-leave.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— Apply for Leave</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Apply Leave - ETS&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Employee&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/employee/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/leaves"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; My Leaves&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/profile"&gt;&lt;i class="fas fa-user"&gt;&lt;/i&gt; Profile&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-calendar-plus"&gt;&lt;/i&gt; Apply for Leave&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;form action="/employee/leaves/save" method="POST"&gt;
+                            &lt;div class="mb-3"&gt;
+                                &lt;label for="leaveType" class="form-label"&gt;Leave Type *&lt;/label&gt;
+                                &lt;select class="form-control" id="leaveType" name="leaveType" required&gt;
+                                    &lt;option value=""&gt;Select Leave Type&lt;/option&gt;
+                                    &lt;option value="SICK"&gt;Sick Leave&lt;/option&gt;
+                                    &lt;option value="CASUAL"&gt;Casual Leave&lt;/option&gt;
+                                    &lt;option value="EARNED"&gt;Earned Leave&lt;/option&gt;
+                                    &lt;option value="UNPAID"&gt;Unpaid Leave&lt;/option&gt;
+                                &lt;/select&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="row"&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="startDate" class="form-label"&gt;Start Date *&lt;/label&gt;
+                                        &lt;input type="date" class="form-control" id="startDate" name="startDate" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div class="col-md-6"&gt;
+                                    &lt;div class="mb-3"&gt;
+                                        &lt;label for="endDate" class="form-label"&gt;End Date *&lt;/label&gt;
+                                        &lt;input type="date" class="form-control" id="endDate" name="endDate" required&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="mb-3"&gt;
+                                &lt;label for="reason" class="form-label"&gt;Reason for Leave *&lt;/label&gt;
+                                &lt;textarea class="form-control" id="reason" name="reason" rows="4" required&gt;&lt;/textarea&gt;
+                            &lt;/div&gt;
+
+                            &lt;div class="mb-3"&gt;
+                                &lt;button type="submit" class="btn btn-primary"&gt;
+                                    &lt;i class="fas fa-paper-plane"&gt;&lt;/i&gt; Submit Request
+                                &lt;/button&gt;
+                                &lt;a href="/employee/leaves" class="btn btn-secondary"&gt;
+                                    &lt;i class="fas fa-times"&gt;&lt;/i&gt; Cancel
+                                &lt;/a&gt;
+                            &lt;/div&gt;
+                        &lt;/form&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <div class="code-file-header">employee/leaves.html &nbsp;<span style="font-weight:normal;font-size:8.5pt;opacity:0.85;">— My Leaves</span></div>
+    <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Leaves - ETS&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
+
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .table {
+            background: white;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;a class="navbar-brand" href="/"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; ETS Employee&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;nav class="col-md-2 sidebar"&gt;
+                &lt;ul class="nav flex-column"&gt;
+                    &lt;li&gt;&lt;a href="/employee/dashboard"&gt;&lt;i class="fas fa-dashboard"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/attendance"&gt;&lt;i class="fas fa-calendar-check"&gt;&lt;/i&gt; Attendance&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/leaves"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; My Leaves&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/employee/profile"&gt;&lt;i class="fas fa-user"&gt;&lt;/i&gt; Profile&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+
+            &lt;main class="col-md-10 main-content"&gt;
+                &lt;div class="row mb-4"&gt;
+                    &lt;div class="col-md-3"&gt;
+                        &lt;div class="stat-card"&gt;
+                            &lt;div class="number text-success" th:text="${approved}"&gt;0&lt;/div&gt;
+                            &lt;p&gt;&lt;i class="fas fa-check-circle"&gt;&lt;/i&gt; Approved&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-md-3"&gt;
+                        &lt;div class="stat-card"&gt;
+                            &lt;div class="number text-warning" th:text="${pending}"&gt;0&lt;/div&gt;
+                            &lt;p&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Pending&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-md-3"&gt;
+                        &lt;div class="stat-card"&gt;
+                            &lt;div class="number text-danger" th:text="${rejected}"&gt;0&lt;/div&gt;
+                            &lt;p&gt;&lt;i class="fas fa-times-circle"&gt;&lt;/i&gt; Rejected&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-md-3"&gt;
+                        &lt;a href="/employee/leaves/apply" class="btn btn-primary w-100"&gt;
+                            &lt;i class="fas fa-plus"&gt;&lt;/i&gt; Apply Leave
+                        &lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="card"&gt;
+                    &lt;div class="card-header"&gt;
+                        &lt;h5 class="mb-0"&gt;&lt;i class="fas fa-calendar-alt"&gt;&lt;/i&gt; Leave Records&lt;/h5&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;div th:if="${leaves.isEmpty()}" class="alert alert-info"&gt;
+                            No leave records yet
+                        &lt;/div&gt;
+                        &lt;div th:if="${not leaves.isEmpty()}" class="table-responsive"&gt;
+                            &lt;table class="table table-hover"&gt;
+                                &lt;thead class="table-light"&gt;
+                                    &lt;tr&gt;
+                                        &lt;th&gt;Type&lt;/th&gt;
+                                        &lt;th&gt;Start Date&lt;/th&gt;
+                                        &lt;th&gt;End Date&lt;/th&gt;
+                                        &lt;th&gt;Reason&lt;/th&gt;
+                                        &lt;th&gt;Status&lt;/th&gt;
+                                        &lt;th&gt;Approved By&lt;/th&gt;
+                                    &lt;/tr&gt;
+                                &lt;/thead&gt;
+                                &lt;tbody&gt;
+                                    &lt;tr th:each="leave : ${leaves}"&gt;
+                                        &lt;td th:text="${leave.leaveType}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${leave.startDate}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${leave.endDate}"&gt;&lt;/td&gt;
+                                        &lt;td th:text="${leave.reason}"&gt;&lt;/td&gt;
+                                        &lt;td&gt;
+                                            &lt;span th:if="${leave.status == 'APPROVED'}" class="badge bg-success"&gt;Approved&lt;/span&gt;
+                                            &lt;span th:if="${leave.status == 'PENDING'}" class="badge bg-warning"&gt;Pending&lt;/span&gt;
+                                            &lt;span th:if="${leave.status == 'REJECTED'}" class="badge bg-danger"&gt;Rejected&lt;/span&gt;
+                                        &lt;/td&gt;
+                                        &lt;td th:text="${leave.approvedBy}"&gt;&lt;/td&gt;
+                                    &lt;/tr&gt;
+                                &lt;/tbody&gt;
+                            &lt;/table&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/main&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </section>
+
+  <section class="section page-break">
+        <h2>CHAPTER 7 : PROJECT PAGE SNAPSHOTS</h2>
+        <p>
+            This chapter presents page-wise visual snapshots of the complete ETS interface flow, covering login, shared pages,
+            admin pages, and employee pages.
+        </p>
+
+        <h3>7.1 Authentication and Shared Pages</h3>
+        <div class="snapshot-grid">
+            <div class="snapshot-card"><div class="snapshot-head">Login Page</div><div class="snapshot-frame"><img src="snapshots/login.png" alt="Login Page Snapshot"></div><p class="small">templates/login.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Access Denied Page</div><div class="snapshot-frame"><img src="snapshots/access-denied.png" alt="Access Denied Snapshot"></div><p class="small">templates/access-denied.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Shared Layout Template</div><div class="snapshot-frame"><img src="snapshots/layout.png" alt="Layout Snapshot"></div><p class="small">templates/layout.html</p></div>
+        </div>
+
+        <h3>7.2 Admin Module Pages</h3>
+        <div class="snapshot-grid">
+            <div class="snapshot-card"><div class="snapshot-head">Admin Dashboard</div><div class="snapshot-frame"><img src="snapshots/admin-dashboard.png" alt="Admin Dashboard"></div><p class="small">templates/admin/dashboard.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Employees List</div><div class="snapshot-frame"><img src="snapshots/admin-employees-list.png" alt="Employees List"></div><p class="small">templates/admin/employees/list.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Add Employee</div><div class="snapshot-frame"><img src="snapshots/admin-employees-add.png" alt="Add Employee"></div><p class="small">templates/admin/employees/add.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Edit Employee</div><div class="snapshot-frame"><img src="snapshots/admin-employees-edit.png" alt="Edit Employee"></div><p class="small">templates/admin/employees/edit.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Departments List</div><div class="snapshot-frame"><img src="snapshots/admin-departments-list.png" alt="Departments List"></div><p class="small">templates/admin/departments/list.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Add Department</div><div class="snapshot-frame"><img src="snapshots/admin-departments-add.png" alt="Add Department"></div><p class="small">templates/admin/departments/add.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Edit Department</div><div class="snapshot-frame"><img src="snapshots/admin-departments-edit.png" alt="Edit Department"></div><p class="small">templates/admin/departments/edit.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Attendance List</div><div class="snapshot-frame"><img src="snapshots/admin-attendance-list.png" alt="Attendance List"></div><p class="small">templates/admin/attendance/list.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Add Attendance</div><div class="snapshot-frame"><img src="snapshots/admin-attendance-add.png" alt="Add Attendance"></div><p class="small">templates/admin/attendance/add.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Edit Attendance</div><div class="snapshot-frame"><img src="snapshots/admin-attendance-edit.png" alt="Edit Attendance"></div><p class="small">templates/admin/attendance/edit.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Leaves List</div><div class="snapshot-frame"><img src="snapshots/admin-leaves-list.png" alt="Leaves List"></div><p class="small">templates/admin/leaves/list.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Pending Leaves</div><div class="snapshot-frame"><img src="snapshots/admin-leaves-pending.png" alt="Pending Leaves"></div><p class="small">templates/admin/leaves/pending.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Users List</div><div class="snapshot-frame"><img src="snapshots/admin-users-list.png" alt="Users List"></div><p class="small">templates/admin/users/list.html</p></div>
+        </div>
+
+        <h3>7.3 Employee Module Pages</h3>
+        <div class="snapshot-grid">
+            <div class="snapshot-card"><div class="snapshot-head">Employee Dashboard</div><div class="snapshot-frame"><img src="snapshots/employee-dashboard.png" alt="Employee Dashboard"></div><p class="small">templates/employee/dashboard.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Profile Page</div><div class="snapshot-frame"><img src="snapshots/employee-profile.png" alt="Employee Profile"></div><p class="small">templates/employee/profile.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Attendance Page</div><div class="snapshot-frame"><img src="snapshots/employee-attendance.png" alt="Employee Attendance"></div><p class="small">templates/employee/attendance.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">Apply Leave Page</div><div class="snapshot-frame"><img src="snapshots/employee-apply-leave.png" alt="Apply Leave"></div><p class="small">templates/employee/apply-leave.html</p></div>
+            <div class="snapshot-card"><div class="snapshot-head">My Leaves Page</div><div class="snapshot-frame"><img src="snapshots/employee-leaves.png" alt="Employee Leaves"></div><p class="small">templates/employee/leaves.html</p></div>
+        </div>
+    </section>
+
+    <section class="section page-break">
+        <h2>CHAPTER 8 : TESTING</h2>
     <p>
       The project is validated through unit and integration test setup in Maven, route access verification by role, form validation checks,
       and end-to-end functional flow testing for attendance and leave operations.
@@ -2877,8 +6077,8 @@ public class LeaveController {
   </section>
 
   <section class="section page-break">
-    <h2>CHAPTER 7 : RESULT AND APPLICATIONS</h2>
-    <h3>7.1 Project Results and Outcomes</h3>
+        <h2>CHAPTER 9 : RESULT AND APPLICATIONS</h2>
+        <h3>9.1 Project Results and Outcomes</h3>
     <p>
       The final solution successfully delivers all targeted modules and provides a robust base for future enterprise extensions. The platform improves process consistency,
       decreases manual effort, and increases visibility over employee activities.
@@ -2889,7 +6089,7 @@ public class LeaveController {
   </section>
 
   <section class="section">
-    <h3>7.2 Challenges and Solutions</h3>
+        <h3>9.2 Challenges and Solutions</h3>
     <table>
       <thead>
         <tr><th>Challenge</th><th>Approach</th><th>Outcome</th></tr>
@@ -2904,8 +6104,8 @@ public class LeaveController {
   </section>
 
   <section class="section page-break">
-    <h2>CHAPTER 8 : CONCLUSION AND FUTURE SCOPE</h2>
-    <h3>8.1 Future Enhancements</h3>
+        <h2>CHAPTER 10 : CONCLUSION AND FUTURE SCOPE</h2>
+        <h3>10.1 Future Enhancements</h3>
     <ul>
       <li>Email and in-app notifications for leave decisions.</li>
       <li>Advanced analytics dashboard and PDF/Excel reporting.</li>
@@ -2916,7 +6116,7 @@ public class LeaveController {
   </section>
 
   <section class="section">
-    <h3>8.2 Conclusion</h3>
+        <h3>10.2 Conclusion</h3>
     <p>
       The Employee Tracking System capstone project demonstrates end-to-end full-stack development with secure architecture and practical business workflows.
       It satisfies major HR operational requirements and serves as a strong foundation for production-grade expansion.
@@ -2924,7 +6124,7 @@ public class LeaveController {
   </section>
 
   <section class="section page-break">
-    <h2>CHAPTER 9 : REFERENCES AND BIBLIOGRAPHY</h2>
+        <h2>CHAPTER 11 : REFERENCES AND BIBLIOGRAPHY</h2>
     <ul>
       <li>Spring Boot Official Documentation</li>
       <li>Spring Security Reference Guide</li>
