@@ -1,17 +1,24 @@
 package com.data.ets.controller;
 
-import com.data.ets.dto.AttendanceDTO;
-import com.data.ets.dto.LeaveDTO;
-import com.data.ets.model.Attendance;
-import com.data.ets.service.AttendanceService;
-import com.data.ets.service.LeaveService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.data.ets.dto.AttendanceDTO;
+import com.data.ets.model.Attendance;
+import com.data.ets.service.AttendanceService;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/admin/attendance")
@@ -69,6 +76,24 @@ public class AttendanceController {
     public String deleteAttendance(@PathVariable Long id) {
         attendanceService.deleteAttendance(id);
         return "redirect:/admin/attendance";
+    }
+
+    @GetMapping("/export/excel")
+    public ResponseEntity<byte[]> exportExcel() {
+        byte[] data = attendanceService.exportToExcel();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=attendance.xlsx")
+                .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+                .body(data);
+    }
+
+    @GetMapping("/export/pdf")
+    public ResponseEntity<byte[]> exportPdf() {
+        byte[] data = attendanceService.exportToPdf();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=attendance.pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(data);
     }
 }
 
